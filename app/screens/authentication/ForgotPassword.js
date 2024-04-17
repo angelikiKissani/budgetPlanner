@@ -15,10 +15,6 @@ const pressedSignIn = () => {
   
  }
 
-
- 
-
-
 const ForgotPassword = () => {
 
 const {email,setEmail}=useState("");
