@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { COLORS,SIZES } from "../../constants";
-import { height } from "@fortawesome/free-solid-svg-icons/faCarSide";
 
 const styles = StyleSheet.create({
 

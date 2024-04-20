@@ -6,7 +6,7 @@ import Welcome from "./home/welcome/welcome";
 import SavingsProgress from "./home/savingsprogress/savingsprogress";
 
 //expenses
-import Expenses from "./expenses/expenses";
+import HeaderExpenses from "./expenses/header/header_expenses";
 
 //savings
 import Savings from "./savings/savings";
@@ -37,7 +37,7 @@ import ForgotPasswordI from "./authentication/forgotPassword/ForgotPasswordI";
 
 
 
-export {Welcome,Summary,ExpencesProgress,Expenses,Card,General_settings,
+export {Welcome,Summary,ExpencesProgress,HeaderExpenses,Card,General_settings,
         Savings,TabBtn,Input,Button,SignUpInput,SignUpButton,
         ForgotPasswordB,ForgotPasswordI,SavingsProgress};
 

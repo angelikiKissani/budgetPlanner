@@ -22,15 +22,6 @@ const styles = StyleSheet.create({
     width:"95%",
     height:70,
     marginTop:10,
-    
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 9,
-    },
-    shadowOpacity: 0.10,
-    shadowRadius: 2.35,
-    elevation: 19,
   },
   col1:  {
     backgroundColor:  COLORS.primary,
@@ -40,6 +31,16 @@ const styles = StyleSheet.create({
     alignItems:"center",
     
     marginRight:20,
+     
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
 
     
   },
@@ -48,7 +49,17 @@ const styles = StyleSheet.create({
     borderRadius:25,
     flex:  1,
     justifyContent:"center",
-    alignItems:"center"
+    alignItems:"center",
+     
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
   },
   title:{
     fontSize: SIZES.xxxLarge,

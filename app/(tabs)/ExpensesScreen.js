@@ -2,7 +2,7 @@ import { StyleSheet,View, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
 
-
+import { HeaderExpenses } from '../../components';
 
 
 export default function Tab() {
@@ -17,6 +17,9 @@ export default function Tab() {
               
           }}/>
           <View style={{flex:1}}>
+            <HeaderExpenses/>
+            
+            
           
       </View>
   </SafeAreaProvider>

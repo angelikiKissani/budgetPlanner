@@ -22,6 +22,7 @@ import stats from "../assets/images/stats.png"
 import background3_2 from "../assets/images/background3_2.png"
 import background3_3 from "../assets/images/background3_3.png"
 import budget_plan_logo from "../assets/images/budget_plan_logo.png"
+import background_4_2 from "../assets/images/background_4_2.png"
 
 
 
@@ -29,6 +30,6 @@ export default {
     pie,stats,profile,logo,account,
     home, savings,expenses,homep,expensesp,accountp,savingsp,
     car,airplane,birthday,add_more,
-    background3_2,budget_plan_logo,background3_3
+    background3_2,budget_plan_logo,background3_3,background_4_2
 
 };

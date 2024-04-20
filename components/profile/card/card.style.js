@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
 
   },
   image:{
+    backgroundColor:COLORS.lightWhite,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

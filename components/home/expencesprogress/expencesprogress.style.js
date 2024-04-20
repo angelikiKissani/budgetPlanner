@@ -27,15 +27,16 @@ const styles = StyleSheet.create({
     marginTop:10,
     padding:10,
     borderRadius:25,
-    shadowColor: COLORS.gray,
+    shadowColor: "#000",
+    shadowColor: "#000",
     shadowOffset: {
-        width: 0,
-        height: 5,
+      width: 0,
+      height: 2,
     },
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
-
-    elevation: 11,
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    
+    elevation: 4,
     
 
   },

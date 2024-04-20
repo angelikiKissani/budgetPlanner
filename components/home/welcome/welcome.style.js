@@ -4,15 +4,18 @@ import { COLORS, SIZES } from "../../../constants";
 
 const styles = StyleSheet.create({
   image:{
+    backgroundColor:"white",
+    borderBottomRightRadius:25,
+    borderBottomLeftRadius:25,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 9,
+      height: 5,
     },
-    shadowOpacity: 0.30,
-    shadowRadius: 12.35,
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
 
-    elevation: 19,
+    elevation: 11,
     
   },
 
