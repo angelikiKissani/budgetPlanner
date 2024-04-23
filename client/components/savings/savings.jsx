@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text,useWindowDimensions, ImageBackground } from 'react-native'
-import { icons,COLORS } from '../../constants'
+import { COLORS,icons } from '../../constants'
 
 import { ScrollView } from 'react-native'
 import styles from './savings.style'

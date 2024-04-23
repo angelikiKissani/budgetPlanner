@@ -1,36 +1,43 @@
 import React,{useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
-import {COLORS,SIZES } from '../../../constants';
-import {ForgotPasswordB,ForgotPasswordI} from '../../../components';
-import { router } from 'expo-router';
+import {COLORS,SIZES } from '../../constants';
+import {ForgotPasswordB,ForgotPasswordI} from '../../components';
+
 
 
 const pressedSendEmail= () => {
     console.warn("SendEmail")
   
 }
-const pressedSignIn = () => { 
-  router.push("/screens/authentication/SignInScreen")
-  
- }
+const pressedSignIn =() =>{
+  console.warn("SignIn")
+}
 
-const ForgotPassword = () => {
+
+const ResetPassword = () => {
 
 const {email,setEmail}=useState("");
 
   return (
     <View style={styles.container}>  
-      <Text style={styles.signUp}>
+      <Text style={styles.title}>
         Reset your Password
       </Text>
+      <Text style={styles.text2}>Confirmation Code:</Text>
       <ForgotPasswordI 
-        placeholder={"Email Address"} 
+        placeholder={"Enter you Confirmation Code"} 
+        value={email} 
+        setValue={setEmail} 
+       />     
+       <Text style={styles.text2}>New Password:</Text> 
+        <ForgotPasswordI 
+        placeholder={"Enter New Password"} 
         value={email} 
         setValue={setEmail} 
        />      
       <ForgotPasswordB 
-        text={"Send email"} 
+        text={"Submit"} 
         onPress={pressedSendEmail} 
         cont_style={"container_1"}
         text_style={"text_1"} />
@@ -54,7 +61,7 @@ const styles= StyleSheet.create({
         margin:20 
 
     },
-    signUp:{
+    title:{
       fontSize:SIZES.xxLarge,
       color:COLORS.tertiary,
       fontWeight:"bold",
@@ -76,6 +83,13 @@ const styles= StyleSheet.create({
       
 
     },
+    text2:{
+        fontSize:SIZES.medium,
+        marginBottom:8,
+        color:COLORS.tertiary,
+        fontWeight:'bold',
+        marginTop:15,
+    },
     link:{
       textDecorationLine:"underline",
       color:COLORS.tertiary
@@ -85,4 +99,4 @@ const styles= StyleSheet.create({
     
 
 
-export default ForgotPassword
+export default ResetPassword

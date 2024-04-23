@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     date:{
         color:"white",
         fontSize:SIZES.medium,
-        fontWeight:"400",
-        fontStyle:"italic"
+        fontWeight:"600",
+        
     },
     row: {
         flexDirection: "row",

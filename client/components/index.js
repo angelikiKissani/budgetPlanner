@@ -23,11 +23,9 @@ import TabBtn from "./common/footer/TabBtn";
                                 //AUTHENTICATION
                                 
 //signIn
-import Input from "./authentication/signIn/Input"
 import Button from "./authentication/signIn/Button"
 
 //signUp
-import SignUpInput from "./authentication/signUp/SignUpI";
 import SignUpButton from "./authentication/signUp/SignUpB";
 
 //forgotPassword
@@ -38,6 +36,6 @@ import ForgotPasswordI from "./authentication/forgotPassword/ForgotPasswordI";
 
 
 export {Welcome,Summary,ExpencesProgress,HeaderExpenses,Card,General_settings,
-        Savings,TabBtn,Input,Button,SignUpInput,SignUpButton,
+        Savings,TabBtn,Button,SignUpButton,
         ForgotPasswordB,ForgotPasswordI,SavingsProgress};
 

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     container_3:{   
         paddingBottom:7,
         alignSelf:"baseline",
-        paddingHorizontal:23
+        paddingHorizontal:1
     },
     
 
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     text_2:{
         fontSize:SIZES.small,
         fontWeight:"bold",
-        color:COLORS.secondary
+        color:COLORS.tertiary
 
     },
     text_3:{
