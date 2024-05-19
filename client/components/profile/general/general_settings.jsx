@@ -1,5 +1,6 @@
 import { View, Text,ScrollView } from 'react-native'
 import React from 'react'
+import { router } from 'expo-router'
 
 
 
@@ -28,7 +29,9 @@ const General_settings=() =>{
     
   }
   const pressedBudgetPlan =()=>{
-    return console.log("pressedBudgetPlan")
+    return (
+      router.push("settings/MyBudgetPlan")
+    )
     
   }
   const pressedCategories =()=>{

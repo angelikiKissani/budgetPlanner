@@ -2,13 +2,13 @@ import {Stack} from 'expo-router/stack';
 
 const Layout = () => {
     return <Stack>
-        {/* <Stack.Screen name="index"/> */}
-        <Stack.Screen name="SignInScreen" options={{
+        <Stack.Screen name="index"/>
+        <Stack.Screen name="authentication/SignInScreen" options={{
             headerShadowVisible:false ,
             headerShown:false,
             animation:"fade"
          }}/>
-        <Stack.Screen name="index" options={{
+        <Stack.Screen name="authentication/SignUpScreen" options={{
             headerShadowVisible:false ,
             headerShown:false,
             animation:"fade"
@@ -18,12 +18,16 @@ const Layout = () => {
             headerShadowVisible:false ,
             headerShown:false,
          }}/> */}
-
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        {/* <Stack.Screen name="TabNavigator"options={{
+         <Stack.Screen name="settings/MyBudgetPlan" options={{
             headerShadowVisible:false ,
             headerShown:false,
-         }}></Stack.Screen> */}
+            animation:"fade",
+            animationDuration:"200"
+         }}/> 
+
+        <Stack.Screen name="(tabs)" options={{ headerShown: false,animation:"fade", animationDuration:"200"
+     }} />
+        
     </Stack>
 
 }

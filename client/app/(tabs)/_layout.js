@@ -1,10 +1,10 @@
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 import { Text,View } from 'react-native';
 
 import { COLORS,icons } from '../../constants';
 import {TabBtn} from '../../components'
+
 
 
 export default function TabLayout() {

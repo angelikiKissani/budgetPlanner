@@ -1,13 +1,17 @@
-import React,{useState} from 'react';
+import React, { useContext } from 'react';
 import { View,Text, Image,StyleSheet, useWindowDimensions,TextInput,secureTextEntry } from 'react-native';
 import {router, Stack} from 'expo-router';
 import {useForm} from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import axios from "axios"
+/////////////
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
-import { COLORS,icons,SIZES} from "../constants";
-import {Button} from '../components';
+
+
+import { COLORS,icons,SIZES} from "../../constants";
+import {Button} from '../../components';
 
 //api
 
@@ -16,31 +20,37 @@ import {Button} from '../components';
 
 const SignInScreen = () => {
 
-
   const {height}= useWindowDimensions()
   const {control, handleSubmit, formState:{errors}} = useForm();
+ 
   
-
 
 
   //routes
   const pressedSignIn= async data => {
     
+    
     email=data.email
     password=data.password
+
+
+    // router.push("(tabs)")
+
+
     const resp= await axios.post("http://192.168.1.4:8001/api/signin",{email,password});
     if (resp.data.error){
       alert(resp.data.error)
     }
     else{
-      alert("Sign In Successful")
-    }
+      // alert("Sign In Successful")
+      router.push("(tabs)")}
+    
     
   }
   const pressedForgotPassword =() =>{
   }
   const pressedDontHaveAccount = () =>{
-    router.push("index")
+    router.push("authentication/SignUpScreen")
   }
 
   return (

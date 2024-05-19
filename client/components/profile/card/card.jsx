@@ -3,6 +3,7 @@ import { View, Text,Image,ImageBackground, useWindowDimensions, } from 'react-na
 import {router} from  'expo-router';
 import {icons} from "../../../constants"
 import styles from './card.style'
+// import axios from "axios"
 
 
 const Row = ({ children }) => (

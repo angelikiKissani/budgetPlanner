@@ -7,6 +7,7 @@ import { COLORS } from '../../constants';
 
 
 export default function Tab() {
+  
   return (
     <SafeAreaProvider style={styles.container}>
     <Stack.Screen
