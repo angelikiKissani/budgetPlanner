@@ -37,7 +37,7 @@ const SignInScreen = () => {
     // router.push("(tabs)")
 
 
-    const resp= await axios.post("http://192.168.1.4:8001/api/signin",{email,password});
+    const resp= await axios.post("http://150.140.233.148:8001/api/signin",{email,password});
     if (resp.data.error){
       alert(resp.data.error)
     }

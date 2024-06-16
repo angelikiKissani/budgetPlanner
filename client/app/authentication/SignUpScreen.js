@@ -30,7 +30,7 @@ const SignUpScreen = () => {
     name=data.name
     email=data.email
     password=data.password
-    const resp= await axios.post("http://192.168.1.4:8001/api/signup",{name,email,password})
+    const resp= await axios.post("http://150.140.233.148:8001/api/signup",{name,email,password})
     if (resp.data.error){
       alert(resp.data.error)
     }

@@ -1,5 +1,5 @@
 import React,{useState, useRef} from 'react';
-import { View,Text, StyleSheet,TouchableOpacity,TextInput,ScrollView} from 'react-native';
+import { View,Text, StyleSheet,TouchableOpacity,TextInput,ScrollView,FlatList,StatusBar} from 'react-native';
 import {router, Stack} from 'expo-router';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -11,7 +11,11 @@ import { COLORS,SIZES} from "../../constants";
 
 import {KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 
+
+
 // import { Animated } from 'react-native';
+
+
 
 
 
@@ -21,55 +25,28 @@ const Budget_plan_select=({frequency,stability})=>{
   if(frequency=="m"){
     if(stability=="s"){
       return(
-        <View style={{flexDirection:"row"}}>
-        {/* <KeyboardAwareScrollView> */}
+        // <View style={{flexDirection:"row"}}>
         
-        <View style={{borderRadius:25,backgroundColor:"#f4f4f5",marginTop:20}}>
-          <View style={{marginTop:30,marginHorizontal:25,bottom:5}}>
-            <Text style={{fontWeight:"800",fontSize:SIZES.xxxLarge,color:COLORS.dark}}>Pay yourself first:</Text>
-            <Text style={{fontWeight:"500",fontSize:SIZES.medium,color:COLORS.tertiary,fontStyle:"italic",marginTop:15}}>The "pay yourself first" strategy advises you to save a certain 
-              amount of your monthly salary for your goals before you do 
-              anything else. </Text>
-              </View>
-          <View style={{margin:25,flexDirection:"row",flexWrap:"wrap"}}>
+          <View style={{borderRadius:25,backgroundColor:"#f4f4f5",marginTop:20}}>
+            <View style={{marginTop:30,marginHorizontal:25,bottom:5}}>
+              <Text style={{fontWeight:"800",fontSize:SIZES.xxxLarge,color:COLORS.dark}}>Pay yourself first:</Text>
+             
+              <Text style={{fontWeight:"500",fontSize:SIZES.medium,color:COLORS.tertiary,fontStyle:"italic",marginTop:15}}>The "pay yourself first" strategy advises you to save a certain 
+                amount of your monthly salary for your goals before you do 
+                anything else. </Text>
+                </View>
+            <View style={{margin:25,flexDirection:"row",flexWrap:"wrap"}}>
+              
+            <Text style={{fontWeight:"800",fontSize:SIZES.large,color:COLORS.dark}}>How does it work:</Text>
+            <Text  style={{fontWeight:"700",fontSize:SIZES.medium,color:COLORS.tertiary,marginTop:15}}> {"\u2023"} A part of your money will be put{"\n"}    into savings each time you get{"\n"}    your paycheck.</Text>
             
-          <Text style={{fontWeight:"800",fontSize:SIZES.large,color:COLORS.dark}}>How does it work:</Text>
-          <Text  style={{fontWeight:"700",fontSize:SIZES.medium,color:COLORS.tertiary,marginTop:15}}> {"\u2023"} A part of your money will be put{"\n"}    into savings each time you get{"\n"}    your paycheck.</Text>
-          
-          <Text  style={{fontWeight:"800",fontSize:SIZES.large,color:COLORS.dark}}>{"\n"}From my monthly salary, I would like to set aside:</Text>
-          <TextInput inputMode='numeric' style={{height:50,width:"100%",borderRadius:5,borderWidth:3,borderColor:COLORS.secondary,marginVertical:10,padding:10}}></TextInput>
-          {/*           
-          <Text style={{fontWeight:"700",fontSize:20,color:COLORS.dark,fontStyle:"italic",marginTop:10}} > Save</Text>
-          <TextInput inputMode='numeric' style={{height:50,width:100,borderRadius:5,borderWidth:3,borderColor:COLORS.secondary,marginHorizontal:10,padding:10}}></TextInput>
-          <Text style={{fontWeight:"700",fontSize:20,color:COLORS.dark,fontStyle:"italic",marginTop:10}} >€   from my </Text>
-          <Text style={{fontWeight:"700",fontSize:20,color:COLORS.dark,fontStyle:"italic",marginTop:10}} >weekly income.</Text> */}
-          </View>
-        </View>
-        <View style={{borderRadius:25,backgroundColor:"#f4f4f5",marginTop:20}}>
-          <View style={{marginTop:30,marginHorizontal:25,bottom:5}}>
-            <Text style={{fontWeight:"800",fontSize:SIZES.xxxLarge,color:COLORS.dark}}>Pay yourself first:</Text>
-            <Text style={{fontWeight:"500",fontSize:SIZES.medium,color:COLORS.tertiary,fontStyle:"italic",marginTop:15}}>The "pay yourself first" strategy advises you to save a certain 
-              amount of your monthly salary for your goals before you do 
-              anything else. </Text>
-              </View>
-          <View style={{margin:25,flexDirection:"row",flexWrap:"wrap"}}>
+            <Text  style={{fontWeight:"800",fontSize:SIZES.large,color:COLORS.dark}}>{"\n"}From my monthly salary, I would like to set aside:</Text>
+            <TextInput inputMode='numeric' style={{height:50,width:"100%",borderRadius:5,borderWidth:3,borderColor:COLORS.secondary,marginVertical:10,padding:10}}></TextInput>
             
-          <Text style={{fontWeight:"800",fontSize:SIZES.large,color:COLORS.dark}}>How does it work:</Text>
-          <Text  style={{fontWeight:"700",fontSize:SIZES.medium,color:COLORS.tertiary,marginTop:15}}> {"\u2023"} A part of your money will be put{"\n"}    into savings each time you get{"\n"}    your paycheck.</Text>
-          
-          <Text  style={{fontWeight:"800",fontSize:SIZES.large,color:COLORS.dark}}>{"\n"}From my monthly salary, I would like to set aside:</Text>
-          <TextInput inputMode='numeric' style={{height:50,width:"100%",borderRadius:5,borderWidth:3,borderColor:COLORS.secondary,marginVertical:10,padding:10}}></TextInput>
-          {/*           
-          <Text style={{fontWeight:"700",fontSize:20,color:COLORS.dark,fontStyle:"italic",marginTop:10}} > Save</Text>
-          <TextInput inputMode='numeric' style={{height:50,width:100,borderRadius:5,borderWidth:3,borderColor:COLORS.secondary,marginHorizontal:10,padding:10}}></TextInput>
-          <Text style={{fontWeight:"700",fontSize:20,color:COLORS.dark,fontStyle:"italic",marginTop:10}} >€   from my </Text>
-          <Text style={{fontWeight:"700",fontSize:20,color:COLORS.dark,fontStyle:"italic",marginTop:10}} >weekly income.</Text> */}
+            </View>
           </View>
-        </View>
-
-
-        {/* </KeyboardAwareScrollView> */}
-        </View>
+          
+        // </View>
       )
 
     }
@@ -243,11 +220,7 @@ const Budget_plan_select=({frequency,stability})=>{
 
 
 const MyBudgetPlan = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState();
   
-  // const pickerRef = useRef();
-
-
   const [frequency , setFrequency]  = useState("m"); 
   const [stability , setStability]  = useState("s"); 
   
@@ -255,7 +228,6 @@ const MyBudgetPlan = () => {
   const [Enable2 , setEnable2]  = useState("cinsashd"); 
 
 
-  
 
   return (
     <SafeAreaProvider style={{flex:1,headerTitle:"",backgroundColor:"white"}}>
@@ -315,8 +287,9 @@ const MyBudgetPlan = () => {
             
             <View style={{backgroundColor:COLORS.secondary,padding:20, borderRadius:25}}>
                 <Text style={[styles.title]}>Suggested Budget Plan</Text>
-                  <ScrollView >
-                    <Budget_plan_select frequency={frequency} stability={stability}/>
+                   <ScrollView > 
+                    <Budget_plan_select frequency={frequency} stability={stability}/> 
+                   
                   </ScrollView>
                   
                 

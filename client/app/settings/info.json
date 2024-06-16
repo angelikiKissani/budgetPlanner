@@ -1,0 +1,25 @@
+{ 
+    "info" : [
+        {
+            "id":"ms_1",
+            "frequency":"m",
+            "stability":"s",
+            "title":"Pay yourself first:",
+            "description": "The pay yourself first strategy advises you to save a certain amount of your monthly salary for your goals before you do anything else.",
+            "info": "A part of your money will be put into savings each time you get your paycheck."
+
+        },
+        {
+            "id":"mns_1",
+            "frequency":"m",
+            "stability":"ns",
+            "title":"Pay yourself first:",
+            "description":"The pay yourself first strategy advises you to save a certain amount of your monthly salary for your goals before you do anything else.",
+            "info":[
+                "You can decide whether or not you wish to save money each month.",
+                "The amount you would like to save will be requested of you when you get your paycheck."
+            ]
+
+        }
+    ]
+}
