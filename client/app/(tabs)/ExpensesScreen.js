@@ -9,12 +9,9 @@ export default function Tab() {
   return (
     <SafeAreaProvider style={styles.container}>
     <Stack.Screen
-          
           options={{
               headerShadowVisible:false ,
               headerShown:false,
-              
-              
           }}/>
           <View style={{flex:1}}>
             <HeaderExpenses/>

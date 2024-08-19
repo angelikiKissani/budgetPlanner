@@ -1,42 +1,38 @@
-import React,{useState} from 'react';
+import React,{useContext, useState} from 'react';
 import {Text, View, StyleSheet,TextInput} from 'react-native';
 import { router,Stack } from 'expo-router';
 import { Controller, useForm } from 'react-hook-form';
 import {KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
-
 import AsyncStorage from "@react-native-async-storage/async-storage"
-
-
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import axios from 'axios';
 
-
 import { COLORS,SIZES } from '../../constants';
 import {SignUpButton} from '../../components';
+import { AuthContext } from '../../context/auth';
 
 
 
 const EMAIL_REGEX= /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-
-
-
 const SignUpScreen = () => {
   const {control, handleSubmit,formState:{errors}, watch}=useForm();
   const pswrd=watch("password");
+  const [state,setState] = useContext(AuthContext);
 
 
   const pressedSignUp= async data => {
     name=data.name
     email=data.email
     password=data.password
-    const resp= await axios.post("http://150.140.233.148:8001/api/signup",{name,email,password})
+    const resp= await axios.post("http://192.168.1.45:8001/api/signup",{name,email,password})
     if (resp.data.error){
       alert(resp.data.error)
     }
     else{
-      await AsyncStorage.setItem("auth-rn",JSON.stringify(data))
-      alert("Sign Up Successful")
+      setState(resp.data)
+      await AsyncStorage.setItem("auth-rn",JSON.stringify(resp.data))
+      // alert("Sign Up Successful")
       router.push("(tabs)")
     }
     
@@ -49,7 +45,7 @@ const SignUpScreen = () => {
     console.warn("PrivacyPolicy")
   }
   const pressedSignIn = () => { 
-  router.push("authentication/SignInScreen")
+  router.push("screens/SignInScreen")
   
   }
 

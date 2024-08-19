@@ -1,12 +1,15 @@
 import React from "react";
-import SignInScreen from "./authentication/SignInScreen";
-
+import SignInScreen from "./screens/SignInScreen";
+import { AuthProvider } from "../context/auth2";
 
 
 const index = ()=>{
 
   return(
-    <SignInScreen/>
+
+    <AuthProvider>
+      <SignInScreen/>
+    </AuthProvider>
     
 
   )

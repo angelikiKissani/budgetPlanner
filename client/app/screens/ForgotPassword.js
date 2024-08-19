@@ -11,7 +11,7 @@ const pressedSendEmail= () => {
   
 }
 const pressedSignIn = () => { 
-  router.push("/screens/authentication/SignInScreen")
+  router.push("/screens/SignInScreen")
   
  }
 

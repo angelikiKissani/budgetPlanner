@@ -1,31 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext} from 'react';
 import { View,Text, Image,StyleSheet, useWindowDimensions,TextInput,secureTextEntry } from 'react-native';
 import {router, Stack} from 'expo-router';
 import {useForm} from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import axios from "axios"
-/////////////
 import AsyncStorage from "@react-native-async-storage/async-storage"
-
 
 
 import { COLORS,icons,SIZES} from "../../constants";
 import {Button} from '../../components';
-
-//api
-
-// import axios from 'axios';
+import { AuthContext } from '../../context/auth2';
 
 
 const SignInScreen = () => {
 
   const {height}= useWindowDimensions()
   const {control, handleSubmit, formState:{errors}} = useForm();
+  const [state,setState] = useContext(AuthContext)
  
-  
-
-
   //routes
   const pressedSignIn= async data => {
     
@@ -33,16 +26,14 @@ const SignInScreen = () => {
     email=data.email
     password=data.password
 
-
-    // router.push("(tabs)")
-
-
-    const resp= await axios.post("http://150.140.233.148:8001/api/signin",{email,password});
+    const resp= await axios.post("http://192.168.1.45:8001/api/signin",{email,password});
     if (resp.data.error){
       alert(resp.data.error)
     }
     else{
       // alert("Sign In Successful")
+      setState(resp.data)
+      await AsyncStorage.setItem("auth-rn",JSON.stringify(resp.data))
       router.push("(tabs)")}
     
     
@@ -50,7 +41,7 @@ const SignInScreen = () => {
   const pressedForgotPassword =() =>{
   }
   const pressedDontHaveAccount = () =>{
-    router.push("authentication/SignUpScreen")
+    router.push("screens/SignUpScreen")
   }
 
   return (

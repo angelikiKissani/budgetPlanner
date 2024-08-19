@@ -1,8 +1,9 @@
-import { View, Text,ScrollView } from 'react-native'
-import React from 'react'
+import { View, Text,ScrollView,Switch,StyleSheet } from 'react-native'
+import React, { useState } from 'react'
 import { router } from 'expo-router'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-
+import { COLORS } from '../../../constants';
 
 import Settings_Btn from "./Btn"
 
@@ -11,31 +12,38 @@ import Settings_Btn from "./Btn"
 
 import styles from './general_setings.style'
 
-
+const NotificationsEnabled = ({enable}) =>{
+  if(enable==true){
+    console.log("NOTIFICATIONS ON")}
+  else{
+    console.log("NOTIFICATIONS OFF")
+  }
+}
 
 const General_settings=() =>{
+
+  const [enable,setEnable] = useState(false)
+
+  const toggleSwitch = () => {
+    setEnable(previousState => !previousState );
+  
+  }
+
   //routes
   const pressedEditProfile =()=>{
-    return console.log("pressedEditProfile")
+    router.push("screens/EditProfile")
 
   }
-  const pressedPrivacy =()=>{
-    return console.log("pressedPrivacy")
-    
-  }
+  
 
-  const pressedNotifications =()=>{
-    return console.log("pressedNotifications")
-    
-  }
   const pressedBudgetPlan =()=>{
     return (
-      router.push("settings/MyBudgetPlan")
+      router.push("screens/MyBudgetPlan")
     )
     
   }
   const pressedCategories =()=>{
-    return console.log("pressedCategories")
+    router.push("screens/Categories")
     
   }
 
@@ -52,8 +60,35 @@ const General_settings=() =>{
       <Text style={styles.title}>General</Text>
 
       <Settings_Btn icon_name={"faPenToSquare"} title={"Edit Profile"} subtitle={"Update and modify your profile"} onPress={pressedEditProfile}/>
-      <Settings_Btn icon_name={"faLock"} title={"Privacy"} subtitle={"Change your password"} onPress={pressedPrivacy}/>
-      <Settings_Btn icon_name={"faBell"} title={"Notifications"} subtitle={"Change your notification settings"} onPress={pressedNotifications}/>
+      {/* <Settings_Btn icon_name={"faLock"} title={"Privacy"} subtitle={"Change your password"} onPress={pressedPrivacy}/>
+       */}
+      
+      {/* Notifications switch */}
+      <View style={styles.notif_Cont}>
+        <View style={{flexDirection:'row'}}>
+        
+          <View style={{margin:10, marginLeft:15,width:50,height:50,backgroundColor:COLORS.secondary,borderRadius:10,justifyContent:"center",alignItems:"center"}}>
+            <MaterialIcons name="notifications" size={40} color={COLORS.tertiary} />     
+          </View>
+          <View style={{justifyContent:"center", marginLeft:5,marginRight:40}}>
+            <Text style={{fontSize: 17,color: COLORS.tertiary,fontWeight:"bold"}}>Push Notifications</Text>
+            {/* <Text style={{fontSize: 13,color: COLORS.secondary,fontWeight:"bold"}}>Change your notification settings</Text> */}
+          </View>
+          <Switch 
+            style={{marginVertical:20}}
+            trackColor={{false: '#767577', true: COLORS.secondary}}
+            thumbColor={enable ? COLORS.white : COLORS.white}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleSwitch}
+            value={enable}
+            
+          ></Switch>
+          <NotificationsEnabled enable={enable}/>
+          </View>
+        </View>
+
+
+      {/* <Settings_Btn icon_name={"faBell"} title={"Notifications"} subtitle={"Change your notification settings"} onPress={pressedNotifications}/> */}
       
        <View style={styles.container2}>
       <Text style={styles.title}>Budget Settings</Text>
@@ -70,6 +105,8 @@ const General_settings=() =>{
 
   )
 }
+
+
 
 
 export default General_settings

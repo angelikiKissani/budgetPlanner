@@ -2,7 +2,7 @@ import { StyleSheet,View, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
 
-import { Card,General_settings } from '../../components';
+import { Account_Info,General_settings } from '../../components';
 import { COLORS } from '../../constants';
 
 
@@ -19,7 +19,7 @@ export default function Tab() {
               
           }}/>
           <View style={{flex:1}}>
-            <Card/>
+            <Account_Info/>
             <General_settings/>
           
       </View>

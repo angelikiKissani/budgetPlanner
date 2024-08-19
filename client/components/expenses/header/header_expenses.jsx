@@ -1,6 +1,6 @@
-import React from 'react'
-import {Text,View,useWindowDimensions, ImageBackground,StyleSheet,ScrollView } from 'react-native'
-import { icons,COLORS,SIZES } from '../../../constants';
+import { React , useCallback, useState } from 'react'
+import {Text,View,StyleSheet,ScrollView, RefreshContro, RefreshControl } from 'react-native'
+import { COLORS,SIZES } from '../../../constants';
 
 import Transactions from "../transactions/transactions"
 import Change_date from '../transactions/change_date';
@@ -8,11 +8,22 @@ import SearchBar from '../search_bar/search_bar';
 
 
 const HeaderExpenses = () => {
-  const {height}=useWindowDimensions();
+
   var transaction = [];
-
-
   const customData = require("../data.json");
+
+
+//refresh page
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = useCallback( () => {
+    setRefreshing(true);
+    setTimeout(()=>{
+      setRefreshing(false)
+    },2000)
+
+  }, [] );
+
+  
     
   for (let i=0, k=0; i<customData.transactions.length ; i++ , k++ ){
     if(i==0 || customData.transactions[i]["date"]!=customData.transactions[i-1]["date"]){
@@ -40,7 +51,7 @@ const HeaderExpenses = () => {
   }
 
   
-  
+
   return (
     // <ImageBackground source={icons.background_4_2} style={[{ height: height* 0.25}]} >
       // <Text style={styles.header}>Expences</Text>
@@ -49,7 +60,11 @@ const HeaderExpenses = () => {
         <SearchBar/>
         <Text style={styles.title}>Transactions </Text>
         <View style={styles.extra}></View>
-        <ScrollView style={styles.scroll_view}>
+        <ScrollView 
+          style={styles.scroll_view}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
+          >
+            
         {transaction}
         </ScrollView>
       </View>

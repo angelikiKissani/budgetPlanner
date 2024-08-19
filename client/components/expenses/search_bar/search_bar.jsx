@@ -1,8 +1,7 @@
 import React from "react"
 import { Text,View,TextInput,StyleSheet } from "react-native"
 
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
-import { faFilter } from "@fortawesome/free-solid-svg-icons"
+import AntDesign from '@expo/vector-icons/AntDesign';
 import { COLORS } from "../../../constants"
 const Row=({children})=>{
     return(
@@ -25,7 +24,8 @@ const SearchBar=()=>{
                    
         />
         <View style={styles.icons}>
-        <FontAwesomeIcon icon={faFilter} size={17} color={COLORS.primary} />
+        <AntDesign name="filter" size={17} color={COLORS.primary} />
+
         </View>
         </Row>
         </View>

@@ -1,0 +1,209 @@
+{
+    "categories": [
+        {
+            "category_id": 0,
+            "name": "Household",
+            "selected": false
+        },
+        {
+            "category_id": 1,
+            "name": "Transportation",
+            "selected": false
+        },
+        {
+            "category_id": 2,
+            "name": "Gas",
+            "selected": false
+        },
+        {
+            "category_id": 3,
+            "name": "Groceries",
+            "selected": false
+        },
+        {
+            "category_id": 4,
+            "name": "Restaurants",
+            "selected": false
+        },
+        {
+            "category_id": 5,
+            "name": "Pet food",
+            "selected": false
+        },
+        {
+            "category_id": 6,
+            "name": "Medications",
+            "selected": false
+        },
+        {
+            "category_id": 7,
+            "name": "Cleaning supplies",
+            "selected": false
+        },
+        {
+            "category_id": 8,
+            "name": "Personal",
+            "selected": false
+        },
+        {
+            "category_id": 9,
+            "name": "Gym memberships",
+            "selected": false
+        },
+        {
+            "category_id": 10,
+            "name": "Haircuts",
+            "selected": false
+        },
+        {
+            "category_id": 11,
+            "name": "Cosmetics",
+            "selected": false
+        },
+        {
+            "category_id": 12,
+            "name": "Education",
+            "selected": false
+        },
+        {
+            "category_id": 13,
+            "name": "Special occasion",
+            "selected": false
+        },
+        {
+            "category_id": 14,
+            "name": "Alcohol",
+            "selected": false
+        },
+        {
+            "category_id": 15,
+            "name": "Games",
+            "selected": false
+        },
+        {
+            "category_id": 16,
+            "name": "Movies",
+            "selected": false
+        },
+        {
+            "category_id": 17,
+            "name": "Subscriptions",
+            "selected": false
+        },
+        {
+            "category_id": 18,
+            "name": "Mortgage or rent",
+            "selected": false
+        },
+        {
+            "category_id": 19,
+            "name": "Property taxes",
+            "selected": false
+        },
+        {
+            "category_id": 20,
+            "name": "Household repairs",
+            "selected": false
+        },
+        {
+            "category_id": 21,
+            "name": "Car Maintenance",
+            "selected": false
+        },
+        {
+            "category_id": 22,
+            "name": "Parking fees",
+            "selected": false
+        },
+        {
+            "category_id": 23,
+            "name": "Utilities",
+            "selected": false
+        },
+        {
+            "category_id": 24,
+            "name": "Clothing",
+            "selected": false
+        },
+        {
+            "category_id": 25,
+            "name": "Medical/Healthcare",
+            "selected": false
+        },
+        {
+            "category_id": 26,
+            "name": "Insurance",
+            "selected": false
+        },
+        {
+            "category_id": 27,
+            "name": "Household Items",
+            "selected": false
+        },
+        {
+            "category_id": 28,
+            "name": "Babysitter",
+            "selected": false
+        },
+        {
+            "category_id": 29,
+            "name": "Personal loans",
+            "selected": false
+        },
+        {
+            "category_id": 30,
+            "name": "Student loans",
+            "selected": false
+        },
+        {
+            "category_id": 31,
+            "name": "Credit cards",
+            "selected": false
+        },
+        {
+            "category_id": 32,
+            "name": "Children\u2019s college",
+            "selected": false
+        },
+        {
+            "category_id": 33,
+            "name": "College",
+            "selected": false
+        },
+        {
+            "category_id": 34,
+            "name": "School supplies",
+            "selected": false
+        },
+        {
+            "category_id": 35,
+            "name": "Books",
+            "selected": false
+        },
+        {
+            "category_id": 36,
+            "name": "Anniversary",
+            "selected": false
+        },
+        {
+            "category_id": 37,
+            "name": "Wedding",
+            "selected": false
+        },
+        {
+            "category_id": 38,
+            "name": "Christmas",
+            "selected": false
+        },
+        {
+            "category_id": 39,
+            "name": "Concerts",
+            "selected": false
+        },
+        {
+            "category_id": 40,
+            "name": "Vacations",
+            "selected": false
+        }
+    ]
+}

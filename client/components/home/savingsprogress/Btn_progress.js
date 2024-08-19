@@ -1,13 +1,7 @@
 import React from "react";
 import {View,Text,StyleSheet,Image,Pressable} from 'react-native'
-
-
-
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import {faCarSide} from '@fortawesome/free-solid-svg-icons/faCarSide'
-import { faPlaneDeparture} from '@fortawesome/free-solid-svg-icons/faPlaneDeparture'
-import { faGraduationCap} from '@fortawesome/free-solid-svg-icons/faGraduationCap'
-import { faCakeCandles} from '@fortawesome/free-solid-svg-icons/faCakeCandles'
+import Ionicons from '@expo/vector-icons/Ionicons';
+import Entypo from '@expo/vector-icons/Entypo';
 
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
@@ -19,22 +13,24 @@ import {COLORS,icons} from "../../../constants"
 const IconSelection = (icon_name)=>{
     if (icon_name==="faCarSide") return (
         <View style={styles.col}>
-            <FontAwesomeIcon icon={faCarSide} color={COLORS.dark} size={30}/>   
+            <Ionicons name="car" size={30} color={COLORS.dark} />
+            
         </View> 
     )
     else if (icon_name==="faPlaneDeparture") return (
         <View style={styles.col}>
-            <FontAwesomeIcon icon={faPlaneDeparture} color={COLORS.dark} size={30}/>
+            <Entypo name="aircraft" size={30} color={COLORS.dark}/>
+            
         </View>    
     )
     else if (icon_name==="faGraduationCap") return (
         <View style={styles.col}>
-            <FontAwesomeIcon icon={faGraduationCap} color={COLORS.dark} size={30}/>  
+          <Entypo name="graduation-cap" size={30} color={COLORS.dark} />
         </View>  
     )
     else if (icon_name==="faCakeCandles") return (
         <View style={styles.col}>
-            <FontAwesomeIcon icon={faCakeCandles} color={COLORS.dark} size={30}/> 
+            <Entypo name="cake" size={30} color={COLORS.dark}/>
         </View>   
       )
     else if (icon_name==="add_btn") return(

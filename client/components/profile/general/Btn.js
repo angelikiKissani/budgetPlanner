@@ -1,14 +1,9 @@
 import React from "react";
 import {View,Text,StyleSheet,Image,Pressable} from 'react-native'
 
-
-
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faPenToSquare} from '@fortawesome/free-solid-svg-icons/faPenToSquare'
-import {faRightFromBracket}from '@fortawesome/free-solid-svg-icons/faRightFromBracket'
-import { faLock} from '@fortawesome/free-solid-svg-icons/faLock'
-import { faBell} from '@fortawesome/free-solid-svg-icons/faBell'
-import {faIcons}  from '@fortawesome/free-solid-svg-icons/faIcons'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import {COLORS,icons} from "../../../constants"
 
  
@@ -17,23 +12,21 @@ const Row = ({ children }) => (
   )
 const IconSelection = (icon_name)=>{
     if (icon_name==="faPenToSquare") return (
-      <FontAwesomeIcon icon={faPenToSquare} color={COLORS.tertiary} size={32}/>    
+      <MaterialIcons name="mode-edit" size={32} color={COLORS.tertiary}/>  
     )
     else if (icon_name==="faLock") return (
-      <FontAwesomeIcon icon={faLock} color={COLORS.tertiary} size={32}/>    
+      <Ionicons name="lock-closed" size={32} color={COLORS.tertiary} />
     )
-    else if (icon_name==="faBell") return (
-      <FontAwesomeIcon icon={faBell} color={COLORS.tertiary} size={32}/>    
-    )
+    
     else if (icon_name=="budget_plan") return (
       <Image source={icons.budget_plan_logo} style={styles.logo}/>
     )
     else if (icon_name=="categories") return (
-      <FontAwesomeIcon icon={faIcons} color={COLORS.tertiary} size={32}/>    
+      <FontAwesome5 name="icons" size={32} color={COLORS.tertiary} />
   
     )
     else if (icon_name=="logout") return (
-      <FontAwesomeIcon icon={faRightFromBracket} color={COLORS.tertiary} size={32}/>    
+      <MaterialIcons name="logout" color={COLORS.tertiary} size={32}/>    
   
     )
 

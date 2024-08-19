@@ -1,29 +1,19 @@
 import React from 'react'
-import {Text,View,useWindowDimensions, ImageBackground } from 'react-native'
+import {Text,View} from 'react-native'
 
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faEuroSign } from '@fortawesome/free-solid-svg-icons/faEuroSign'
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import styles from './transactions.style'
 import { COLORS } from '../../../constants'
 
 
 
-
-
-const Row=({children})=>{
-  return(
-    <View style={styles.row}>{children}</View>
-  )
-
-}
-
 const Transactions = ({description,price,category,date,time}) => {
 
   return (
 
-      <Row>
+    <View style={styles.row}>
         <View style={styles.icon_container}>
-          <FontAwesomeIcon icon={faEuroSign} size={22} color={COLORS.tertiary} style={styles.icon}/>
+        <MaterialCommunityIcons name="bank-transfer-out" size={22} color={COLORS.tertiary} style={styles.icon}/>
         </View>
         <View style={styles.description_container}>
           <View>
@@ -37,7 +27,7 @@ const Transactions = ({description,price,category,date,time}) => {
         <View style={styles.price_container}>
           <Text style={styles.price_text}>{"-"}{price}{"€"}</Text>
         </View>
-      </Row>
+      </View>
 
 
   )};

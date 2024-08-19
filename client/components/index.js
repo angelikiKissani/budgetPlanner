@@ -11,11 +11,12 @@ import HeaderExpenses from "./expenses/header/header_expenses";
 //savings
 import Savings from "./savings/savings";
 //profile
-import Card from "./profile/card/card";
+import Account_Info from "./profile/account_info";
 import General_settings from "./profile/general/general_settings";
 
 //common
 import TabBtn from "./common/footer/TabBtn";
+import CategoryBtn from "./common/categories/CategoryBtn";
 
 
 
@@ -35,7 +36,7 @@ import ForgotPasswordI from "./authentication/forgotPassword/ForgotPasswordI";
 
 
 
-export {Welcome,Summary,ExpencesProgress,HeaderExpenses,Card,General_settings,
+export {Welcome,Summary,ExpencesProgress,HeaderExpenses,Account_Info,General_settings,
         Savings,TabBtn,Button,SignUpButton,
-        ForgotPasswordB,ForgotPasswordI,SavingsProgress};
+        ForgotPasswordB,ForgotPasswordI,SavingsProgress,CategoryBtn};
 
