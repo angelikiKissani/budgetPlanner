@@ -4,6 +4,7 @@ import { COLORS, SIZES } from "../../../constants";
 
 const styles = StyleSheet.create({
   image:{
+    
     backgroundColor:"white",
     borderBottomRightRadius:25,
     borderBottomLeftRadius:25,
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
+    flex:1,
     width: "100%",
     paddingTop:10,
     paddingLeft:20,

@@ -8,8 +8,9 @@ import {TabBtn} from '../../components'
 
 
 export default function TabLayout() {
+
   return (
-    <Tabs  
+    <Tabs  initialRouteName='index'
     screenOptions={{
         tabBarStyle: {
           position:'absolute',
@@ -18,6 +19,7 @@ export default function TabLayout() {
           paddingTop:10,
           paddingBottom:20
     }}}>
+      
       <Tabs.Screen
         name="index"
         options={{

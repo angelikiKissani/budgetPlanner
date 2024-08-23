@@ -1,13 +1,7 @@
 import express from "express"
-
-
-// import { createRequire } from "module";
-// const require = createRequire(import.meta.url);
-
-
 const router =  express.Router();
 
-import { signup,signin,forgotPassword,resetPassword} from "../controllers/auth.js"
+import { signup,signin,forgotPassword,resetPassword,uploadImage,updatePassword,updateName} from "../controllers/auth.js"
 
 router.get("/",(req,res)=>{
     return res.json({
@@ -23,5 +17,9 @@ router.post("/signup",signup);
 router.post("/signin",signin);
 router.post("/forgotPassword",forgotPassword);
 router.post("/resetPassword",resetPassword);
+router.post("/upload-image",uploadImage);
+router.post("/update-password",updatePassword);
+router.post("/update-name",updateName)
+
 
 export default router;

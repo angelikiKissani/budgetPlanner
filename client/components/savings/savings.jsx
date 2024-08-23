@@ -22,7 +22,7 @@ const {height}=useWindowDimensions();
 
   return (
 
-    <ImageBackground source={icons.background3_3} style={[{ height: height* 0.25}]} >
+    <ImageBackground source={icons.background3_3} style={[{ height: height* 0.25,flex:1}]} >
       <Text style={styles.header}>Savings</Text>
       <View style={styles.container_2}>
         <View style={styles.container_3}>

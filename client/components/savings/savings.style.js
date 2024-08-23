@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     borderRadius:25
   },
   container_4:{
+    flex:1,
     height:1000
   },
   header: {

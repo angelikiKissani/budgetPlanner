@@ -15,7 +15,7 @@ import { AuthContext } from '../../context/auth';
 
 const EMAIL_REGEX= /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-const SignUpScreen = () => {
+const SignUpScreen = ({navigation}) => {
   const {control, handleSubmit,formState:{errors}, watch}=useForm();
   const pswrd=watch("password");
   const [state,setState] = useContext(AuthContext);
@@ -33,7 +33,7 @@ const SignUpScreen = () => {
       setState(resp.data)
       await AsyncStorage.setItem("auth-rn",JSON.stringify(resp.data))
       // alert("Sign Up Successful")
-      router.push("(tabs)")
+      navigation.navigate("Home")
     }
     
 
@@ -45,7 +45,8 @@ const SignUpScreen = () => {
     console.warn("PrivacyPolicy")
   }
   const pressedSignIn = () => { 
-  router.push("screens/SignInScreen")
+  // router.push("screens/SignInScreen")
+  navigation.navigate("SignIn")
   
   }
 

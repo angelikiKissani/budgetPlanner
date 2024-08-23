@@ -1,17 +1,16 @@
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-
-
 require("dotenv").config();
+
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
 import authRoutes from "./routes/auth.js";
 
 const morgan =require("morgan");
 
 const app = express();
+const http =require("http").createServer(app)
 
 mongoose.connect(process.env.DATABASE, { useNewUrlParser: true , useUnifiedTopology: true,'useCreateIndex': true})
         .then(()=> console.log("DB connected"))
@@ -19,7 +18,7 @@ mongoose.connect(process.env.DATABASE, { useNewUrlParser: true , useUnifiedTopol
 
 
 //middlewares
-
+app.use(express.json({limit:"4mb"}))
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
 app.use(cors());

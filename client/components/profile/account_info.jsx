@@ -2,7 +2,7 @@ import React, { useContext,useState,useEffect } from 'react'
 import { View, Text,Image,ImageBackground, useWindowDimensions,StyleSheet } from 'react-native'
 
 import { icons,COLORS,SIZES } from '../../constants';
-import {AuthContext} from '../../context/auth2'
+import {AuthContext} from '../../context/auth'
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import axios from 'axios';
 
@@ -12,38 +12,23 @@ import axios from 'axios';
 const Account_Info = () => {
   const {height}=useWindowDimensions();
 
-  // const {email,setEmail}=useState("");
-  // const {name,setName}=useState("");
-  // // const [password,setPassword]=useState("");
+  const [email,setEmail]=useState("");
+  const [name,setName]=useState("");
+  const [image,setImage] =useState("")
+  // const [password,setPassword]=useState("");
   
-  // // const {role,setRole}= useState("");
-  // const [state,setState] = useContext(AuthContext);
+  const [state,setState] = useContext(AuthContext);
 
-  // useEffect(()=>{
-  //   console.log(state)
-  //   if (state){
-  //     const {name , email} = state.user;
-  //     setName(name);
-  //     setEmail(email);
-  //     // setRole(role);
-  //   }
-  // } , [state] )
+  useEffect(()=>{
+    console.log(state)
+    if (state){
+      const {name , email,image} = state.user;
+      setName(name);
+      setEmail(email);
+      setImage(image)
+    }
+  } , [state] )
 
-  // const handleSubmit = async ()=>{
-  //   if(email ==='' ){
-  //     alert("afar")
-  //     return;
-  //   }
-  //   const resp = await axios.post("http://192.168.1.45:8001/api/signin",{email,password});
-  //   if (resp.data.error){
-  //     alert(resp.data.error)
-  //   }
-  //   else{
-  //     // alert("Sign In Successful")
-  //     setState(resp.data)
-  //     await AsyncStorage.setItem("auth-rn",JSON.stringify(resp.data))
-  //     router.push("(tabs)")}
-  //   }
 
   
   return (
@@ -53,11 +38,11 @@ const Account_Info = () => {
       <View style={styles.container2}>
         <View style={styles.row}>
             <View>
-                <Image source={icons.profile} style={[styles.profilepic,{ height: height* 0.11,width: height* 0.11}]}></Image>
+                <Image source={image} style={[styles.profilepic,{ height: height* 0.11,width: height* 0.11}]}></Image>
             </View>
             <View style={styles.col2} >
-                <Text style={styles.name}>name </Text>
-                <Text style={styles.email}>email</Text>   
+                <Text style={styles.name}>{name} </Text>
+                <Text style={styles.email}>{email}</Text>   
                 
             </View>
         </View>

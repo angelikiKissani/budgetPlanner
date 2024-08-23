@@ -78,17 +78,18 @@ const HeaderExpenses = () => {
 
 const styles = StyleSheet.create({
   scroll_view:{
+    flex:1,
     paddingHorizontal:15,
     left:-10,
     marginHorizontal:-10,
-    marginBottom:190,
+    height:"70%"
 
     
 
   },
 
   container:{
-    
+    flex:1,
     backgroundColor:"white",
     borderTopLeftRadius:25,
     borderTopRightRadius:25,

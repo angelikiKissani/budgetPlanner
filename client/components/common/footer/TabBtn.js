@@ -18,8 +18,9 @@ const styles = StyleSheet.create({
   container:{
     width: 110,
     height: 110,
-    justifyContent: "center",
+    marginVertical:20,
     alignItems: "center",
+    right:5
   },
   
   image: (dimension) => ({

@@ -10,10 +10,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 
 import { COLORS,icons,SIZES} from "../../constants";
 import {Button} from '../../components';
-import { AuthContext } from '../../context/auth2';
+import { AuthContext } from '../../context/auth';
 
 
-const SignInScreen = () => {
+const SignInScreen = ({navigation}) => {
 
   const {height}= useWindowDimensions()
   const {control, handleSubmit, formState:{errors}} = useForm();
@@ -34,14 +34,17 @@ const SignInScreen = () => {
       // alert("Sign In Successful")
       setState(resp.data)
       await AsyncStorage.setItem("auth-rn",JSON.stringify(resp.data))
-      router.push("(tabs)")}
+      // router.push("(tabs)")
+      navigation.navigate("Home")
+      }
     
     
   }
   const pressedForgotPassword =() =>{
+    navigation.navigate("ForgotPassword")
   }
   const pressedDontHaveAccount = () =>{
-    router.push("screens/SignUpScreen")
+    navigation.navigate("SignUp")
   }
 
   return (

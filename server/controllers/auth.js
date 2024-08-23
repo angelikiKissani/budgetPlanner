@@ -2,11 +2,21 @@ import User from "../models/user.js";
 import { hashPassword, comparePassword } from "../helpers/auth.js";
 import jwt from "jsonwebtoken";
 import {nanoid} from "nanoid";
+import { v2 as cloudinary } from 'cloudinary';
+
+
+// CLOUDINARY
+cloudinary.config({
+    cloud_name:"demhttv9p",
+    api_key:"782819135857778",
+    api_secret:"ErlOQ35WxiQzooB413WlswhjHcI"
+
+})
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
-// sendgrid
+// SENDGRID
 require("dotenv").config();
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_KEY);
@@ -55,7 +65,7 @@ export const signup = async (req, res) => {
             // create signed token
             const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {expiresIn: "7d"});
 
-            console.log(user);
+            // console.log(user);
 
             const { password, ...rest } = user._doc;
 
@@ -71,7 +81,6 @@ export const signup = async (req, res) => {
         console.log(err);
     }
 };
-
 
 ///////////////SIGNIN/////////////
 export const signin = async (req, res) => {
@@ -123,7 +132,7 @@ export const forgotPassword = async (req, res) => {
     const user = await User.findOne({ email });
     console.log("USER ===> ", user);
 
-
+    console.log(process.env.EMAIL_FROM);
     if (!user) {
         return res.json({ error: "User not found" });
     }
@@ -137,7 +146,7 @@ export const forgotPassword = async (req, res) => {
         from: process.env.EMAIL_FROM,
         to: user.email,
         subject: "Password reset code",
-        html: "<h1>Your password  reset code is: {resetCode}</h1>"
+        html: `<h1>Your password  reset code is: ${resetCode}</h1>`
     };
     // send email
     try {
@@ -177,3 +186,89 @@ export const resetPassword = async (req, res) => {
     console.log(err);
     }
 };
+
+//////////UPLOAD IMAGE//////////
+export const uploadImage =async (req,res)=>{
+    
+    try{
+        
+        const result = await cloudinary.uploader.upload(req.body.image, {
+            public_id:nanoid() , 
+            resource_type:"image"
+        });
+
+        const user =await User.findByIdAndUpdate(
+            req.body.user._id,
+            {
+                image:{
+                    public_id:result.public_id,
+                    url:result.secure_url,
+                },
+            },{ new: true ,
+                useFindAndModify: false
+            }
+            
+               
+        );
+        // if (!user) {
+        //     return res.status(404).json({ error: 'User not found' });
+        // }
+      
+        return res.json({
+            name: user.name,
+            email:user.email,
+            role:user.role,
+            image:user.image,
+        })
+    }catch(err){
+        console.log(err);
+    }
+};
+
+
+//////////UPDATE PASSWORD//////////
+export const updatePassword = async (req,res) =>{
+   try{ 
+        
+        const password = req.body.password;
+        console.log(password);
+        const hashedPassword = await hashPassword(password);
+        const user =await User.findByIdAndUpdate(
+            req.body.user._id,
+            {
+                password:hashedPassword,
+            },{ new: true ,
+                useFindAndModify: false
+            });
+
+            user.password=undefined;
+            user.secret=undefined;
+            return res.json({
+                user
+            })
+    }catch(err) {console.log(err)}
+
+
+}
+
+export const updateName = async (req,res)=>{
+    try{ 
+        const fullName = req.body.name;
+        
+        const user =await User.findByIdAndUpdate(
+            req.body.user._id,
+            {
+                name:fullName,
+            },{ new: true ,
+                useFindAndModify: false
+            });
+
+            return res.json({
+                name: user.name,
+                email:user.email,
+                role:user.role,
+                image:user.image,
+            })
+    }catch(err) {console.log(err)}
+
+}

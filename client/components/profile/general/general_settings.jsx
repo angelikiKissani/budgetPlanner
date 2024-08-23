@@ -1,10 +1,11 @@
 import { View, Text,ScrollView,Switch,StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { router } from 'expo-router'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import { COLORS } from '../../../constants';
-
+import AuthContext from "../../../context/auth"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Settings_Btn from "./Btn"
 
 
@@ -23,6 +24,7 @@ const NotificationsEnabled = ({enable}) =>{
 const General_settings=() =>{
 
   const [enable,setEnable] = useState(false)
+  const [state,setState] = useContext(AuthContext)
 
   const toggleSwitch = () => {
     setEnable(previousState => !previousState );
@@ -47,8 +49,11 @@ const General_settings=() =>{
     
   }
 
-  const pressedSignOut =()=>{
-    return console.log("pressedSignOut")
+  const pressedSignOut = async()=>{
+    
+      setState({token:"",user:null});
+      await AsyncStorage.removeItem("auth-rn")
+    
     
   }
 

@@ -3,15 +3,17 @@ import { View,TextInput,StyleSheet } from "react-native";
 
 import { COLORS ,SIZES} from '../../../constants'
 
-const ForgotPasswordI = ({value,setValue,placeholder}) => { 
+const ForgotPasswordI = ({value,placeholder,onChangeText}) => { 
     return(
         <View style={styles.container}>
             <TextInput
             value={value}
-            setValue={setValue}
             placeholder={placeholder}
             placeholderTextColor={COLORS.gray}
             style={styles.input}
+            onChangeText={onChangeText}
+            autoCorrect={false}
+            autoCapitalize="none"
             
 
             />
