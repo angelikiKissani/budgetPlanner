@@ -22,8 +22,8 @@ export default function Home({navigation}) {
             
             <Welcome navigation={navigation}/>
             <Summary/>
-            <ExpencesProgress/>
-            <SavingsProgress/>
+            <ExpencesProgress navigation={navigation}/>
+            <SavingsProgress navigation={navigation}/>
             <FooterList/>
         </View>
     </SafeAreaProvider>

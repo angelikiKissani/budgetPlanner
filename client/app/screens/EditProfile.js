@@ -1,6 +1,6 @@
 import React,{useContext, useState,useEffect} from 'react';
-import { View,Text, StyleSheet,TouchableOpacity,TextInput,useWindowDimensions, Pressable,ImageBackground,Image} from 'react-native';
-import {router, Stack} from 'expo-router';
+import { View,Text, StyleSheet,TouchableOpacity,TextInput,useWindowDimensions, Pressable,Image} from 'react-native';
+import { Stack} from 'expo-router';
 import { Keyboard } from 'react-native';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -176,13 +176,13 @@ const EditProfile = ({navigation}) => {
                         style={{margin:10,fontSize:18 , 
                           borderBottomWidth:1,
                           borderBottomColor:COLORS.gray2,
-                          width:200}}></TextInput>
+                          width:220}}></TextInput>
                     <TextInput value={surname} 
                         autoCapitalize='none'
                         autoComplete='off'
                         autoCorrect="false"
-                      placeholder='surname' onChangeText={text=>setSurname(text)}placeholderTextColor={COLORS.dark} style={{margin:10,fontSize:18 , borderBottomWidth:1,borderBottomColor:COLORS.gray2,width:200}}></TextInput>
-                    <View style={{margin:10, borderBottomWidth:1,borderBottomColor:COLORS.gray2,width:200}}><Text style={{fontSize:18 }} >{email}</Text></View>
+                      placeholder='surname' onChangeText={text=>setSurname(text)}placeholderTextColor={COLORS.dark} style={{margin:10,fontSize:18 , borderBottomWidth:1,borderBottomColor:COLORS.gray2,width:220}}></TextInput>
+                    <View style={{margin:10, borderBottomWidth:1,borderBottomColor:COLORS.gray2,width:220}}><Text style={{fontSize:18 }} >{email}</Text></View>
                     
                     
                   </View>

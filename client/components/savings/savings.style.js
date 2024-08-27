@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
 
 
   },
+  // bar savings
   container_3: {
     marginTop:10,
     height:85,
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
   },
   container_4:{
     flex:1,
-    height:1000
+    marginBottom:400
   },
   header: {
     fontSize: SIZES.xxxLarge,
@@ -44,21 +45,22 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
+    flex:1,
     marginTop:5,
     paddingLeft:5,
     padding:8,
+    
     
     
   },
   row_2: {
     flexDirection: "row",
     paddingLeft:5,
-    padding:8,
+    padding:3,
     marginTop:25,
-    height:120,
     width:"95%",
     backgroundColor:COLORS.primary,
-    borderRadius:25,
+    borderRadius:17,
     alignItems:"center"
 
   },
@@ -66,6 +68,7 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor:COLORS.white,
     height:"100%",
+    paddingBottom:1,
     borderBottomEndRadius:15,
     borderTopEndRadius:15,
     marginLeft:10
@@ -76,9 +79,62 @@ const styles = StyleSheet.create({
     fontSize: SIZES.large,
     color: COLORS.dark,
     fontWeight:"bold",
-    marginLeft:5,
-    marginTop:20
-  }
+    
+    
+  },
+  addnewgoal:{
+    fontSize: SIZES.medium,
+    color: COLORS.tertiary,
+    fontWeight:"bold",
+    textDecorationLine: 'underline',
+    marginRight:15
+
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    // marginHorizontal: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    paddingHorizontal: 18,
+    paddingVertical: 22,
+    alignItems: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    borderWidth:0.4,
+    borderColor:COLORS.gray,
+    
+    elevation: 4,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: COLORS.tertiary,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
 });
 
 export default styles;

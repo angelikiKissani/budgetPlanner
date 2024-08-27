@@ -1,5 +1,5 @@
 import { React , useCallback, useState } from 'react'
-import {Text,View,StyleSheet,ScrollView, RefreshContro, RefreshControl } from 'react-native'
+import {Text,View,StyleSheet,ScrollView,RefreshControl } from 'react-native'
 import { COLORS,SIZES } from '../../../constants';
 
 import Transactions from "../transactions/transactions"

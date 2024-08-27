@@ -250,7 +250,7 @@ export const updatePassword = async (req,res) =>{
 
 
 }
-
+///////UPDATE INFO/////////
 export const updateName = async (req,res)=>{
     try{ 
         const fullName = req.body.name;
@@ -272,3 +272,8 @@ export const updateName = async (req,res)=>{
     }catch(err) {console.log(err)}
 
 }
+
+
+
+
+

@@ -42,7 +42,7 @@ export default function ProfileScreen({navigation}) {
 
   const pressedBudgetPlan =()=>{
     return (
-      router.push("screens/MyBudgetPlan")
+      navigation.navigate("MyBudgetPlan")
     )
     
   }

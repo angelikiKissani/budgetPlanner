@@ -3,6 +3,7 @@ const router =  express.Router();
 
 import { signup,signin,forgotPassword,resetPassword,uploadImage,updatePassword,updateName} from "../controllers/auth.js"
 
+
 router.get("/",(req,res)=>{
     return res.json({
         data:"helloworld from the API",
@@ -19,7 +20,8 @@ router.post("/forgotPassword",forgotPassword);
 router.post("/resetPassword",resetPassword);
 router.post("/upload-image",uploadImage);
 router.post("/update-password",updatePassword);
-router.post("/update-name",updateName)
+router.post("/update-name",updateName);
+
 
 
 export default router;

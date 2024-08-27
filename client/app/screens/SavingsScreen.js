@@ -8,24 +8,14 @@ import {Savings} from "../../components"
 export default function SavingScreen() {
   return (
     <SafeAreaProvider style={styles.container}>
-    <Stack.Screen
-          
-          options={{
-              headerShadowVisible:false ,
-              headerShown:false,
-              
-              
-          }}/>
-          <View style={{flex:1}}>
+    <Stack.Screen options={{headerShadowVisible:false ,headerShown:false,}}/>
+      <View style={{flex:1}}>
             <Savings/>
-            <FooterList/>
-          
+            <FooterList/> 
       </View>
   </SafeAreaProvider>
   );
 }
-
-
 
 
 const styles = StyleSheet.create({

@@ -7,12 +7,12 @@ import styles from './transactions.style'
 
 
 
-const Row=({children})=>{
-  return(
-    <View style={styles.row}>{children}</View>
-  )
+// const Row=({children})=>{
+//   return(
+//     <View style={styles.row}>{children}</View>
+//   )
 
-}
+// }
 
 const Change_date = ({date}) => {
 

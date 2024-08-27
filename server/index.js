@@ -6,6 +6,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import authRoutes from "./routes/auth.js";
+import goalsRoutes from  "./routes/goals.js"
 
 const morgan =require("morgan");
 
@@ -26,5 +27,6 @@ app.use(morgan("dev"));
 
 //route middlewares
 app.use("/api",authRoutes);
+app.use("/api",goalsRoutes);
 
 app.listen(8001, ()=> console.log("Server running on port 8001"))

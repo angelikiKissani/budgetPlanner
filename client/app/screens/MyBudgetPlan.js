@@ -16,11 +16,11 @@ const AutoSelected = ({isAuto}) =>{
   const [date,setDate] =useState(new Date());
   const [days,setDays]= useState();
   // const [show,setShow]=useState(false);
-  const [mode,setMode]=useState('date');
 
-  const onChangeDays = (selectedDays)=>{
-    setDays(selectedDays);
-  };
+
+  // const onChangeDays = (selectedDays)=>{
+  //   setDays(selectedDays);
+  // };
   const onChangeDate = (e,selectedDate)=>{
     setDate(selectedDate);
     // setShow(false);
@@ -88,7 +88,7 @@ const AutoSelected = ({isAuto}) =>{
             <Text style={{fontWeight:"800",fontSize:18,color:COLORS.dark}}>Date: </Text>
             <Text style={{fontWeight:"500",fontSize:15,color:COLORS.tertiary,fontStyle:"italic"}}>Select a date for the first {"\n"}transfer </Text>
           </View>
-          <DateTimePicker style={{flex:1 }} value={date} mode={mode} is24Hour={true} onChange={onChangeDate}/>
+          <DateTimePicker style={{flex:1 }} value={date} mode={"date"} is24Hour={true} onChange={onChangeDate}/>
          </View>
          
       </View>
@@ -99,7 +99,7 @@ const AutoSelected = ({isAuto}) =>{
 
 
 
-const MyBudgetPlan = () => {
+const MyBudgetPlan = ({navigation}) => {
   
   const [Enable1 , setEnable1]  = useState("cinsashd"); 
 
@@ -125,7 +125,7 @@ const MyBudgetPlan = () => {
         <Pressable onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.row}>
-            <TouchableOpacity onPress={()=>{router.push("(tabs)/ProfileScreen")}}>
+            <TouchableOpacity onPress={()=>{navigation.navigate("Profile")}}>
             <AntDesign name="left" size={24} color={COLORS.dark} />
             </TouchableOpacity>
             <View style={{flex:1,backgroundColor:"white",height:40}}>

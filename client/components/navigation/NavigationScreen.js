@@ -23,13 +23,13 @@ const NavigationScreen = ()=>{
         <Stack.Navigator initialRouteName="SignIn" >
             {authenticated ? 
             (<>
-              <Stack.Screen name="Home" component={Home} options={{ headerShown: false,animation:"fade", animationDuration:"200"}}/>
-              <Stack.Screen name="Expenses" component={ExpensesScreen} options={{ headerShown: false,animation:"fade", animationDuration:"200"}}/>
-              <Stack.Screen name="Savings" component={SavingsScreen} options={{ headerShown: false,animation:"fade", animationDuration:"200"}}/>
-              <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false,animation:"fade", animationDuration:"200"}}/>
-              <Stack.Screen name="Categories" component={Categories} options={{ headerShown: false,animation:"fade", animationDuration:"200"}}/>
-              <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false,animation:"fade", animationDuration:"200"}}/>
-              <Stack.Screen name="MyBudgetPlan" component={MyBydgetPlan} options={{ headerShown: false,animation:"fade", animationDuration:"200"}}/>
+              <Stack.Screen name="Home" component={Home} options={{gestureEnabled:false, headerShown: false,animation:"fade", animationDuration:"200"}}/>
+              <Stack.Screen name="Expenses" component={ExpensesScreen} options={{ gestureEnabled:false, headerShown: false,animation:"fade", animationDuration:"200"}}/>
+              <Stack.Screen name="Savings" component={SavingsScreen} options={{gestureEnabled:false,headerShown: false,animation:"fade", animationDuration:"200"}}/>
+              <Stack.Screen name="Profile" component={ProfileScreen} options={{ gestureEnabled:false,headerShown: false,animation:"fade", animationDuration:"200"}}/>
+              <Stack.Screen name="Categories" component={Categories} options={{gestureEnabled:false, headerShown: false,animation:"fade", animationDuration:"200"}}/>
+              <Stack.Screen name="EditProfile" component={EditProfile} options={{ gestureEnabled:false,headerShown: false,animation:"fade", animationDuration:"200"}}/>
+              <Stack.Screen name="MyBudgetPlan" component={MyBydgetPlan} options={{gestureEnabled:false, headerShown: false,animation:"fade", animationDuration:"200"}}/>
                </>
             )
             :
