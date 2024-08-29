@@ -59,6 +59,7 @@ export const signup = async (req, res) => {
             const user = await new User({
                 name,
                 email,
+                savings:0,
                 password: hashedPassword,
             }).save();
 
@@ -91,7 +92,7 @@ export const signin = async (req, res) => {
 
         // check for the same email in our database
         const user = await User.findOne({ email });
-        
+        console.log(user);
         if (!user) {
             return res.json({
             error: "No user found",
@@ -112,6 +113,7 @@ export const signin = async (req, res) => {
 
         user.password = undefined;
         user.secret = undefined;
+        
         res.json({
             token,
             user,
@@ -121,7 +123,6 @@ export const signin = async (req, res) => {
         return res.status(400).send("Error. Try again.");
     }
 };
-
 
 //////////FORGOT PASSWORD///////////
 export const forgotPassword = async (req, res) => {
@@ -225,7 +226,6 @@ export const uploadImage =async (req,res)=>{
     }
 };
 
-
 //////////UPDATE PASSWORD//////////
 export const updatePassword = async (req,res) =>{
    try{ 
@@ -233,6 +233,7 @@ export const updatePassword = async (req,res) =>{
         const password = req.body.password;
         console.log(password);
         const hashedPassword = await hashPassword(password);
+        console.log(req.body.user)
         const user =await User.findByIdAndUpdate(
             req.body.user._id,
             {
@@ -250,6 +251,7 @@ export const updatePassword = async (req,res) =>{
 
 
 }
+
 ///////UPDATE INFO/////////
 export const updateName = async (req,res)=>{
     try{ 

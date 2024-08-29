@@ -101,7 +101,7 @@ const EditProfile = ({navigation}) => {
       setPassword(newPassword)
       let storedData = await AsyncStorage.getItem("auth-rn");
       const parsed = JSON.parse(storedData);
-      console.log(password)
+      console.log(parsed)
       const resp =await axios.post("http://192.168.1.45:8001/api/update-password",{password , user:parsed.user});
       const data= resp.data;
       if(data.error) alert(data.error);

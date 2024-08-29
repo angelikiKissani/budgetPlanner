@@ -20,7 +20,7 @@ const Account_Info = () => {
   const [state,setState] = useContext(AuthContext);
 
   useEffect(()=>{
-    console.log(state)
+   
     if (state){
       const {name , email,image} = state.user;
       setName(name);

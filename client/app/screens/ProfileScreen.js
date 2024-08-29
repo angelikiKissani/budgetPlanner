@@ -15,11 +15,11 @@ import Settings_Btn from "../../components/profile/general/Btn"
 import styles from '../../components/profile/general/general_setings.style';
 
 const NotificationsEnabled = ({enable}) =>{
-  if(enable==true){
-    console.log("NOTIFICATIONS ON")}
-  else{
-    console.log("NOTIFICATIONS OFF")
-  }
+  // if(enable==true){
+  //   console.log("NOTIFICATIONS ON")}
+  // else{
+  //   console.log("NOTIFICATIONS OFF")
+  // }
 }
 
 

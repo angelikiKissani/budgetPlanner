@@ -30,7 +30,9 @@ const userSchema = new Schema(
         required:true,
     },
     money_per_month: {
-        type:String,
+        type:Number,
+        required:true,
+        default:0,
  
     },
     saved_this_month: {
@@ -48,7 +50,8 @@ const userSchema = new Schema(
         type:String,
         required:true,
         
-    }
+    },
+
     
     },
     { timestamps: true }

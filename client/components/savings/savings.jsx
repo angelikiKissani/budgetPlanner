@@ -15,10 +15,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios';
 
 
+
 const Savings = () => {
 
   const {height}=useWindowDimensions();
   const [modalVisible, setModalVisible] = useState(false);
+
 
   const [goal_name,setGoalName] =useState("");
   const [start_date,setStartDate] =useState(new Date());
@@ -27,7 +29,9 @@ const Savings = () => {
   const [icon,setIcon] =useState("");
   const [today,setToday] =useState(new Date())
 
-  const [goals,setGoals] =useContext(GoalContext)
+  const [goals,setGoals] =useContext(GoalContext);
+
+  
 
   const [selected,setSelected] =useState();
   const [showIconPicker, setShowIconPicker] = useState(false);
@@ -48,30 +52,52 @@ const Savings = () => {
   useEffect(()=>{
     fetchGoals();
   },[refresh,modalVisible])
-
+  
+  // show goals
   const fetchGoals = async() =>{
 
     let storedData =await AsyncStorage.getItem("auth-rn");
     const parsed =JSON.parse(storedData);
     const {data}=await axios.post("http://192.168.1.45:8001/api/show-goal",{user_id:parsed.user._id})
+
     setGoals(data)
 
   }
 
-
+  //tap on Add new goal
   const pressedAddNewGoal = () =>{
-    setModalVisible(true),
-    
-    console.log("pressedAddNewGoal")
+    setModalVisible(true)    
   }
-
+  //save new goal 
   const pressedSaveNewGoal = async () =>{
     // console.log(goal_name , start_date.toLocaleDateString() , finish_date.toLocaleDateString(), goal_money, icon.family , icon.icon  )
-    
+    // console.log(icon);
+    if(goal_name==""){
+      Alert.alert("Please add a Goal name");
+      return;
+    }
+    if(goal_money==""){
+      Alert.alert("Please add Money goal");
+      return;
+    };
+    if(icon==""){
+      Alert.alert("Please add an icon");
+      return;
+    };
+
+
     let storedData =await AsyncStorage.getItem("auth-rn");
     const parsed =JSON.parse(storedData);
-    // console.log(parsed.user)
-    const {data}= await axios.post("http://192.168.1.45:8001/api/add-goal",{name:goal_name,start_date:start_date.toLocaleDateString(),finish_date:finish_date.toLocaleDateString(),goal_money:Number(goal_money),icon_name:icon.icon,icon_family:icon.family,user_id:parsed.user._id });
+    
+    var start_date_MONTH=start_date.getMonth()+1;
+    var finish_date_MONTH=finish_date.getMonth()+1;
+    var start_date_YEAR=start_date.getFullYear();
+    var finish_date_YEAR=finish_date.getFullYear();
+    var calc=(goal_money/(finish_date_MONTH-start_date_MONTH+1+12*(finish_date_YEAR-start_date_YEAR))).toFixed(1);
+
+
+    console.log(start_date);
+    const {data}= await axios.post("http://192.168.1.45:8001/api/add-goal",{name:goal_name,start_date:start_date.toLocaleDateString(),money_per_month:calc,finish_date:finish_date.toLocaleDateString(),goal_money:Number(goal_money),icon_name:icon.icon,icon_family:icon.family,user_id:parsed.user._id });
     if(data.error=="Goal name exists"){Alert.alert("You have previously used this goal name. Try again.")}
     else{
       setModalVisible(false);
@@ -80,6 +106,8 @@ const Savings = () => {
 
 
   }
+
+ 
 
 
 
@@ -95,7 +123,7 @@ return (
             {goals && goals.map( item=>(
               <View key={item._id}>
                 <Btn_progress icon_family={item.icon_family} icon_name={item.icon_name} progress={Number(item.progress)*100/ Number(item.goal_money)} />
-                </View>
+              </View>
                 ))}
               
                </ScrollView>
@@ -127,14 +155,14 @@ return (
               </View>
               <View style={{flexDirection:"row",alignItems:"center",margin:15,fontSize:18 ,width:230, borderBottomWidth:1,borderBottomColor:COLORS.gray2}}>
                   <Text style={{fontSize:SIZES.medium,marginHorizontal:5,fontWeight:600}}>Start Date: </Text>
-                  <DateTimePicker style={{flex:1,marginBottom:2 }} minimumDate={today} value={start_date} mode={"date"} is24Hour={true} 
+                  <DateTimePicker disabled={true} style={{flex:1,marginBottom:2 }} minimumDate={today} value={start_date} mode={"date"} is24Hour={true} 
                                   onChange={(e,selectedDate)=>{setStartDate(selectedDate)}}/>
               </View>
               <View style={{flexDirection:"row",alignItems:"center",margin:15,fontSize:18 ,width:230, borderBottomWidth:1,borderBottomColor:COLORS.gray2}}>
                   <Text style={{fontSize:SIZES.medium,marginHorizontal:5,fontWeight:600}}>End Date: </Text>
                   <DateTimePicker style={{flex:1,marginBottom:2 }} minimumDate={start_date} value={finish_date} mode={"date"} is24Hour={true}  onChange={(e,selectedDate)=>{setFinishDate(selectedDate)}}/>
                 
-                  {/* <TextInput value={finish_date} style={{width:100}} /> */}
+                  
               </View>                                                                    
               <View style={{flexDirection:"row",alignItems:"center",margin:15,fontSize:18 ,width:230, borderBottomWidth:1,borderBottomColor:COLORS.gray2}}>
                   <Text style={{fontSize:SIZES.medium,marginHorizontal:5,fontWeight:600}}>Money goal: </Text>
@@ -188,6 +216,7 @@ return (
 
           {/* MY GOALS */}
           <ScrollView refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh}/>} >
+          <KeyboardAwareScrollView style={{height:"100%"}}>
             <View style={styles.container_4}>
               <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-between",marginHorizontal:5}}>
                 <View>
@@ -202,14 +231,15 @@ return (
               
               {goals && goals.map(item=>(
                 
-                <Goal icon_family={item.icon_family} 
+                <Goal key={item._id}
+                      icon_family={item.icon_family} 
                       icon_name={item.icon_name} 
                       goal_name={item.name} 
                       start_date={item.start_date} 
                       finish_date={item.finish_date} 
                       progress={item.progress} 
                       goal_money={item.goal_money} 
-                      money_per_month={75} 
+                      money_per_month={item.money_per_month} 
                       onRefresh={fetchGoals} 
                       saved_this_month={item.saved_this_month}/>
                  
@@ -219,6 +249,7 @@ return (
 
               
             </View>
+            </KeyboardAwareScrollView>
           </ScrollView>
         </View>
           

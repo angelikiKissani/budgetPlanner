@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   container_4:{
     flex:1,
-    marginBottom:400
+    marginBottom:550
   },
   header: {
     fontSize: SIZES.xxxLarge,

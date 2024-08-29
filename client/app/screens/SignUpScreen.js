@@ -30,19 +30,19 @@ const SignUpScreen = ({navigation}) => {
       alert(resp.data.error)
     }
     else{
-      setState(resp.data)
-      await AsyncStorage.setItem("auth-rn",JSON.stringify(resp.data))
-      // alert("Sign Up Successful")
-      navigation.navigate("Home")
+      // setState(resp.data)
+      // await AsyncStorage.setItem("auth-rn",JSON.stringify(resp.data))
+      alert("You can Sign In now")
+      navigation.navigate("SignIn")
     }
     
 
   }
   const pressedTermsOfUse =() =>{
-    console.warn("TermsOfUse")
+    // console.warn("TermsOfUse")
   }
   const pressedPrivacyPolicy =() =>{
-    console.warn("PrivacyPolicy")
+    // console.warn("PrivacyPolicy")
   }
   const pressedSignIn = () => { 
   // router.push("screens/SignInScreen")
@@ -86,6 +86,8 @@ const SignUpScreen = ({navigation}) => {
                       value={value} 
                       onChangeText={onChange} 
                       onBlur={onBlur} 
+                      autoComplete='false'
+                      autoCorrect="false"
                       placeholder={"Name"}
                       placeholderTextColor={COLORS.gray2} 
                       style={styles.input} />
@@ -118,6 +120,9 @@ const SignUpScreen = ({navigation}) => {
                         value={value} 
                         onChangeText={onChange} 
                         onBlur={onBlur} 
+                        autoCapitalize={false}
+                        autoComplete='false'
+                        autoCorrect="false"
                         placeholder={"Email"}
                         placeholderTextColor={COLORS.gray2} 
                         style={styles.input} 
@@ -156,6 +161,9 @@ const SignUpScreen = ({navigation}) => {
                         value={value} 
                         onChangeText={onChange} 
                         onBlur={onBlur} 
+                        autoCapitalize={false}
+                        autoComplete='false'
+                        autoCorrect="false"
                         placeholder={"Password"} 
                         placeholderTextColor={COLORS.gray2} 
                         style={styles.input} />
@@ -181,6 +189,9 @@ const SignUpScreen = ({navigation}) => {
                         value={value} 
                         onChangeText={onChange} 
                         onBlur={onBlur} 
+                        autoCapitalize={false}
+                        autoComplete='false'
+                        autoCorrect="false"
                         placeholder={"Repeat password"} 
                         placeholderTextColor={COLORS.gray2} 
                         style={styles.input} />

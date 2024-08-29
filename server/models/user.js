@@ -23,6 +23,11 @@ const userSchema = new Schema(
         type: String,
         default: "Subscriber",
     },
+    savings:{
+        type:Number,
+        default:0,
+        required:true,
+    },
     image: {
         public_id: "",
         url: "",

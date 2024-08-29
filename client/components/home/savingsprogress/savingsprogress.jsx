@@ -1,4 +1,4 @@
-import React,{useContext,useEffect} from 'react'
+import React,{useContext,useEffect,useState} from 'react'
 import { View, Text,Image,ScrollView } from 'react-native'
 import { COLORS, icons } from '../../../constants'
 import styles from './savingsprogress.style'
@@ -6,23 +6,37 @@ import { router } from 'expo-router'
 import Btn_progress from "./Btn_progress"
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios';
-import { GoalContext } from '../../../context/goals'
+import { GoalContext } from '../../../context/goals';
+import { AuthContext } from '../../../context/auth'
 
 
 
 
 
 const SavingsProgress = ({navigation}) => {
-const [goals,setGoals] =useContext(GoalContext)
+const [goals,setGoals] =useContext(GoalContext);
+const [state,setState] = useContext(AuthContext);
+const [user,setUser] =useState();
+  useEffect(() => {
+    if (user) {
+        fetchGoals();
+    }
+  }, [user]);  
   useEffect(()=>{
-    fetchGoals();
-  },[])
+    if (state){
+      console.log(state.user);
+      setUser(state.user);
+      
+      
+    }
+  } , [state] )
+
 
   const fetchGoals = async() =>{
-
-    let storedData =await AsyncStorage.getItem("auth-rn");
-    const parsed =JSON.parse(storedData);
-    const {data}=await axios.post("http://192.168.1.45:8001/api/show-goal",{user_id:parsed.user._id})
+    console.log(user)
+    // let storedData =await AsyncStorage.getItem("auth-rn");
+    // const parsed =JSON.parse(storedData);
+    const {data}=await axios.post("http://192.168.1.45:8001/api/show-goal",{user_id:user._id})
     setGoals(data)
 
   }

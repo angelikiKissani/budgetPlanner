@@ -6,7 +6,11 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import authRoutes from "./routes/auth.js";
-import goalsRoutes from  "./routes/goals.js"
+import goalsRoutes from  "./routes/goals.js";
+import cron from 'node-cron';
+
+
+
 
 const morgan =require("morgan");
 
@@ -17,7 +21,20 @@ mongoose.connect(process.env.DATABASE, { useNewUrlParser: true , useUnifiedTopol
         .then(()=> console.log("DB connected"))
         .catch((err)=> console.log("DB CONNECTION ERROR: " ,err));
 
-
+import Goal from "./models/goal.js"
+const resetProperty = async () => {
+        try {
+                await Goal.updateMany({}, { saved_this_month:0 });
+                console.log('Property "saved_this_month" reset to 0 for all documents');
+        } catch (err) {
+                console.error('Error updating documents:', err);
+        }
+        };
+cron.schedule('0 0 1 * *', () => {
+        console.log('Cron job running every first of the month,midnight');
+        resetProperty();
+        });
+        
 //middlewares
 app.use(express.json({limit:"4mb"}))
 app.use(express.json());
