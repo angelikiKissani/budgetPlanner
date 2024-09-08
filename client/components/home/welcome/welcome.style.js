@@ -6,8 +6,9 @@ const styles = StyleSheet.create({
   image:{
     
     backgroundColor:"white",
-    borderBottomRightRadius:25,
-    borderBottomLeftRadius:25,
+    borderBottomRightRadius:35,
+    borderBottomLeftRadius:35,
+    bottom:15,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -27,17 +28,26 @@ const styles = StyleSheet.create({
     paddingLeft:20,
     
   },
+  welcomeBack: {
+    fontSize: 18,
+    color: '#484848',
+    fontWeight:"bold",
+    marginHorizontal:10
+  },
   userName: {
-    fontSize: SIZES.xxxLarge,
+    fontSize: 38,
     color: COLORS.dark,
     fontWeight:"bold",
-    margin:10
+    marginHorizontal:9,
+    paddingLeft:10,
   },
   profilepic:{ 
-    marginTop:40,
-    marginHorizontal:"85%",
+    marginTop:60,
+    marginHorizontal:"87%",
     borderRadius:30,
     shadowColor: "#000",
+    borderWidth:0.5,
+    borderColor:COLORS.tertiary
 
     
   }

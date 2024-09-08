@@ -1,40 +1,59 @@
-import { React , useCallback, useState } from 'react'
+import { React , useCallback, useContext, useEffect, useState } from 'react'
 import {Text,View,StyleSheet,ScrollView,RefreshControl } from 'react-native'
 import { COLORS,SIZES } from '../../../constants';
-
+import { useFocusEffect } from '@react-navigation/native';
 import Transactions from "../transactions/transactions"
 import Change_date from '../transactions/change_date';
 import SearchBar from '../search_bar/search_bar';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { AuthContext } from '../../../context/auth';
+import {TransactionContext} from "../../../context/transaction"
 
 const HeaderExpenses = () => {
-
+  const [state,setState] = useContext(AuthContext);
+  const [transactions,setTransactions]=useContext(TransactionContext)
   var transaction = [];
   const customData = require("../data.json");
 
 
 //refresh page
-  const [refreshing, setRefreshing] = useState(false);
-  const onRefresh = useCallback( () => {
-    setRefreshing(true);
-    setTimeout(()=>{
-      setRefreshing(false)
-    },2000)
+const [refresh, setRefresh] = useState(false);
+const onRefresh = useCallback( () => {
+  setRefresh(true);
+  setTimeout(()=>{
+    setRefresh(false)
+  },2000)
 
-  }, [] );
+}, [] );
+  useEffect(()=>{
+    fetchTransactions();
+  },[refresh])
+  useFocusEffect(
+    useCallback(() => {
+      fetchTransactions();
+    }, [])
+  );
 
   
-    
-  for (let i=0, k=0; i<customData.transactions.length ; i++ , k++ ){
-    if(i==0 || customData.transactions[i]["date"]!=customData.transactions[i-1]["date"]){
+  const fetchTransactions = async ()=>{
+    let storedData =await AsyncStorage.getItem("auth-rn");
+    const parsed =JSON.parse(storedData);
+    const {data}=await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/fetch-transaction",{user_id:parsed.user._id})
+    setTransactions({data}.data.result)
+
+
+  }
+  for (let i=0, k=0; i<transactions.length ; i++ , k++ ){
+    if(i==0 || transactions[i]["date"]!=transactions[i-1]["date"]){
       transaction.splice(0,0,
         <View key={k}>
-        <Change_date date={customData.transactions[i]["date"]}/>
+        <Change_date date={transactions[i]["date"]}/>
         </View>
       )
       transaction.splice(1,0,
         <View key={k+1}>
-        <Transactions description={customData.transactions[i]["name"]} time={customData.transactions[i]["time"]} date={customData.transactions[i]["date"]} category={customData.transactions[i]["category"]} price={customData.transactions[i]["price"]} />
+        <Transactions onRefresh={onRefresh} description={transactions[i]["description"]} time={transactions[i]["time"]} date={transactions[i]["date"]} category={transactions[i]["category"]} price={transactions[i]["price"]} />
         </View>
       )
       k+=1
@@ -43,26 +62,27 @@ const HeaderExpenses = () => {
     else{
       transaction.splice(1,0,
         <View key={k}>
-        <Transactions description={customData.transactions[i]["name"]} time={customData.transactions[i]["time"]}  date={customData.transactions[i]["date"]} category={customData.transactions[i]["category"]} price={customData.transactions[i]["price"]} />
+        <Transactions onRefresh={onRefresh} description={transactions[i]["description"]} time={transactions[i]["time"]}  date={transactions[i]["date"]} category={transactions[i]["category"]} price={transactions[i]["price"]} />
         </View>
       )}
 
   
   }
 
+
+
+    
+  
   
 
   return (
-    // <ImageBackground source={icons.background_4_2} style={[{ height: height* 0.25}]} >
-      // <Text style={styles.header}>Expences</Text>
-      <View style={styles.container}>
-        {/* <Text style={styles.title}>My Categories {"\n"}</Text> */}
-        <SearchBar/>
+     <View style={styles.container}>
+       <SearchBar/>
         <Text style={styles.title}>Transactions </Text>
         <View style={styles.extra}></View>
         <ScrollView 
           style={styles.scroll_view}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
+          refreshControl={<RefreshControl refresh={refresh} onRefresh={onRefresh}/>}
           >
             
         {transaction}
@@ -70,8 +90,6 @@ const HeaderExpenses = () => {
       </View>
 
 
-
-    // </ImageBackground>
   )
   };
 

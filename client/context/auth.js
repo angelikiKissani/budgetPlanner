@@ -24,14 +24,18 @@ const AuthProvider = ({children}) =>{
             
         },
         async function (error) {
-            let res =error.response;
-            if (res.status === 401 && res.config && !res.config.__isRetryRequest){
-                await AsyncStorage.removeItem("auth-rn");
-                setState({user:null ,token:""});
-                navigation.navigate("SignIn")
-            }
+            if (error.response) {
+                let res = error.response;
+                if ( res.config && !res.config.__isRetryRequest){
+                    await AsyncStorage.removeItem("auth-rn");
+                    setState({user:null ,token:""});
+                    navigation.navigate("SignIn")
+                }
             
-        }
+            } else {
+                console.error("Error response is undefined:", error);
+            }
+}
     )
 
     
@@ -40,8 +44,11 @@ const AuthProvider = ({children}) =>{
     useEffect( () => {
         const loadFromAsyncStorage = async () =>{
             let data =  await AsyncStorage.getItem("auth-rn");
-            const parsed = JSON.parse(data);
-            setState({ ...state, user: parsed.user, token:parsed.token});
+
+            if (data){
+                const parsed = JSON.parse(data);
+                setState({ ...state, user: parsed.user, token:parsed.token});
+            }
         };
         loadFromAsyncStorage();
     } , []);

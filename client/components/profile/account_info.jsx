@@ -3,8 +3,7 @@ import { View, Text,Image,ImageBackground, useWindowDimensions,StyleSheet } from
 
 import { icons,COLORS,SIZES } from '../../constants';
 import {AuthContext} from '../../context/auth'
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import axios from 'axios';
+
 
 
 
@@ -33,7 +32,7 @@ const Account_Info = () => {
   
   return (
     <View style={styles.container_}>
-    <ImageBackground source={icons.background3_2} style={[styles.image,{ height: height* 0.26}]} imageStyle={{ borderBottomRightRadius: 25}}>
+    <ImageBackground source={icons.background3_2} style={[styles.image,{ height: height* 0.27}]} imageStyle={{ borderBottomRightRadius: 25}}>
       <View style={styles.container}><Text style={styles.header}> Profile</Text></View>
       <View style={styles.container2}>
         <View style={styles.row}>
@@ -56,20 +55,13 @@ const Account_Info = () => {
 const styles = StyleSheet.create({
 
   container_:{
-    height:330
+    height:330,
 
   },
   image:{
-    backgroundColor:COLORS.lightWhite,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 5.35,
-
-    elevation: 19,
+    backgroundColor:"COLORS.lightWhite",
+    bottom:9
+    
     
   },
   row: {

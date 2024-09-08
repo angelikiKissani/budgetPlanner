@@ -18,15 +18,16 @@ const styles = StyleSheet.create({
 
   container: {
     width: "100%",
-    height:210,
+    marginTop:30,
     paddingLeft:20,
   },
   container2:{
-    backgroundColor:"white",
-    marginEnd:20,
+    borderRadius:15,
+    
+    paddingTop:10,
+    marginEnd:40,
     marginTop:10,
-    padding:10,
-    borderRadius:25,
+    backgroundColor:"white",
     shadowColor: "#000",
     shadowColor: "#000",
     shadowOffset: {
@@ -59,7 +60,10 @@ const styles = StyleSheet.create({
   col2:  {
     borderRadius:30,
     flex:  1.2,
-  }
+  },
+  chartContainer: {
+    height: 400,
+  },
 });
 
 export default styles;

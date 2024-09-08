@@ -32,6 +32,11 @@ const userSchema = new Schema(
         public_id: "",
         url: "",
     },
+    accounting_balance:{
+        type:Number,
+        default:0,
+    },
+
     resetCode: "",
     },
     { timestamps: true }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useCallback, useContext} from 'react'
-import { View, Text,useWindowDimensions, ImageBackground,Pressable,Modal,TextInput, Alert,RefreshControl } from 'react-native'
+import { View, Text,useWindowDimensions, ImageBackground,Pressable,Modal,TextInput, Alert,RefreshControl, TouchableOpacity } from 'react-native'
 import {icons } from '../../constants'
 import { ScrollView } from 'react-native'
 import styles from './savings.style'
@@ -53,22 +53,21 @@ const Savings = () => {
     fetchGoals();
   },[refresh,modalVisible])
   
-  // show goals
-  const fetchGoals = async() =>{
 
-    let storedData =await AsyncStorage.getItem("auth-rn");
-    const parsed =JSON.parse(storedData);
-    const {data}=await axios.post("http://192.168.1.45:8001/api/show-goal",{user_id:parsed.user._id})
-
-    setGoals(data)
-
-  }
-
-  //tap on Add new goal
+  //Tap on Add new goal
   const pressedAddNewGoal = () =>{
     setModalVisible(true)    
   }
-  //save new goal 
+
+   //Show goals
+   const fetchGoals = async() =>{
+    let storedData =await AsyncStorage.getItem("auth-rn");
+    const parsed =JSON.parse(storedData);
+    console.log(parsed)
+    const {data}=await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/show-goal",{user_id:parsed.user._id})
+    setGoals(data)
+  }
+  //Save new goal 
   const pressedSaveNewGoal = async () =>{
     // console.log(goal_name , start_date.toLocaleDateString() , finish_date.toLocaleDateString(), goal_money, icon.family , icon.icon  )
     // console.log(icon);
@@ -94,10 +93,8 @@ const Savings = () => {
     var start_date_YEAR=start_date.getFullYear();
     var finish_date_YEAR=finish_date.getFullYear();
     var calc=(goal_money/(finish_date_MONTH-start_date_MONTH+1+12*(finish_date_YEAR-start_date_YEAR))).toFixed(1);
-
-
-    console.log(start_date);
-    const {data}= await axios.post("http://192.168.1.45:8001/api/add-goal",{name:goal_name,start_date:start_date.toLocaleDateString(),money_per_month:calc,finish_date:finish_date.toLocaleDateString(),goal_money:Number(goal_money),icon_name:icon.icon,icon_family:icon.family,user_id:parsed.user._id });
+    // console.log(parsed);
+    const {data}= await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/add-goal",{name:goal_name,start_date:start_date.toLocaleDateString(),money_per_month:calc,finish_date:finish_date.toLocaleDateString(),goal_money:Number(goal_money),icon_name:icon.icon,icon_family:icon.family,user_id:parsed.user._id });
     if(data.error=="Goal name exists"){Alert.alert("You have previously used this goal name. Try again.")}
     else{
       setModalVisible(false);
@@ -107,12 +104,11 @@ const Savings = () => {
 
   }
 
- 
-
 
 
 return (
-      <ImageBackground source={icons.background3_3} style={[{ height: height* 0.25,flex:1}]} >
+    <View style={{flex:1}}>
+      <ImageBackground source={icons.background3_3} style={[{ height: height* 0.2}]} imageStyle={{left: 80}} >
         <Text style={styles.header}>Savings</Text>
         <View style={styles.container_2}>
 
@@ -120,17 +116,21 @@ return (
           <View style={styles.container_3}>
             <View style={styles.row}>
               <ScrollView style={{flex:1,flexDirection:"row"}} horizontal={true}>
-            {goals && goals.map( item=>(
-              <View key={item._id}>
-                <Btn_progress icon_family={item.icon_family} icon_name={item.icon_name} progress={Number(item.progress)*100/ Number(item.goal_money)} />
-              </View>
+                {goals && goals.map( item=>(
+                  <View key={item._id}>
+                    <Btn_progress icon_family={item.icon_family} icon_name={item.icon_name} progress={Number(item.progress)*100/ Number(item.goal_money)} />
+                  </View>
                 ))}
               
                </ScrollView>
-            <Btn_progress icon_family={"MaterialIcon"} icon_name={"add"} progress={0} onPress={pressedAddNewGoal} add_btn={true} />
-            </View>
+               <View style={{borderWidth:1,borderColor:COLORS.dark,height:60,alignSelf:"center",bottom:8,}}></View>
+            <TouchableOpacity style={styles.add_btn_container } onPress={pressedAddNewGoal}>
+              <IconSelector family={"MaterialIcon"} color={COLORS.dark} icon={"add"} size={31} />
+            </TouchableOpacity>
+           
+           </View>
           </View>
-
+          
           {/* ADD NEW GOAL */}
           <Modal
             animationType="slide"
@@ -155,8 +155,9 @@ return (
               </View>
               <View style={{flexDirection:"row",alignItems:"center",margin:15,fontSize:18 ,width:230, borderBottomWidth:1,borderBottomColor:COLORS.gray2}}>
                   <Text style={{fontSize:SIZES.medium,marginHorizontal:5,fontWeight:600}}>Start Date: </Text>
-                  <DateTimePicker disabled={true} style={{flex:1,marginBottom:2 }} minimumDate={today} value={start_date} mode={"date"} is24Hour={true} 
-                                  onChange={(e,selectedDate)=>{setStartDate(selectedDate)}}/>
+                  <Text>{start_date.toLocaleDateString()}</Text>
+                  {/* <DateTimePicker disabled={true} style={{flex:1,marginBottom:2 }} value={today} mode={"date"} is24Hour={true} 
+                                  /> */}
               </View>
               <View style={{flexDirection:"row",alignItems:"center",margin:15,fontSize:18 ,width:230, borderBottomWidth:1,borderBottomColor:COLORS.gray2}}>
                   <Text style={{fontSize:SIZES.medium,marginHorizontal:5,fontWeight:600}}>End Date: </Text>
@@ -255,6 +256,7 @@ return (
           
             
       </ImageBackground>
+      </View>
     
     )
     

@@ -16,7 +16,7 @@ export default function ExpensesScreen() {
           }}/>
           <View style={{flex:1}}>
             <HeaderExpenses/>
-            <FooterList/>
+            <FooterList pressedExpenses={true}/>
             
             
           

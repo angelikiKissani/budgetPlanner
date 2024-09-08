@@ -3,18 +3,13 @@ import { Text,View,TextInput,StyleSheet } from "react-native"
 
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { COLORS } from "../../../constants"
-const Row=({children})=>{
-    return(
-      <View style={styles.row}>{children}</View>
-    )
-  
-  }
+
 
 const SearchBar=()=>{
 
     return (
         <View>
-        <Row>
+       < View style={styles.row}>
         <TextInput placeholder="Search Transaction" 
                    clearButtonMode="always"
                    style={styles.search_box}
@@ -27,7 +22,7 @@ const SearchBar=()=>{
         <AntDesign name="filter" size={17} color={COLORS.primary} />
 
         </View>
-        </Row>
+        </View>
         </View>
     )
 }

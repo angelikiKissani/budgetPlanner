@@ -1,5 +1,5 @@
 import React, { useContext} from 'react';
-import { View,Text, Image,StyleSheet, useWindowDimensions,TextInput,secureTextEntry } from 'react-native';
+import { View,Text, Image,StyleSheet, useWindowDimensions,TextInput,secureTextEntry, Alert } from 'react-native';
 import {router, Stack} from 'expo-router';
 import {useForm} from 'react-hook-form';
 import { Controller } from 'react-hook-form';
@@ -20,15 +20,16 @@ const SignInScreen = ({navigation}) => {
   const [state,setState] = useContext(AuthContext)
  
   //routes
-  const pressedSignIn= async data => {
+  const pressedSignIn= async (data) => {
     
     
     email=data.email
     password=data.password
 
-    const resp= await axios.post("http://192.168.1.45:8001/api/signin",{email,password});
+    const resp= await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/signin",{email,password});
+    console.log(resp)
     if (resp.data.error){
-      alert(resp.data.error)
+     Alert.alert(resp.data.error)
     }
     else{
       // alert("Sign In Successful")

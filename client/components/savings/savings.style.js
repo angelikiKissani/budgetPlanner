@@ -4,8 +4,8 @@ import { COLORS,SIZES } from "../../constants";
 const styles = StyleSheet.create({
 
   container_2:{
-    marginTop:15,
-    backgroundColor:"white",
+    marginTop:10,
+    backgroundColor:"#F8F8F8",
     borderTopLeftRadius:25,
     borderTopRightRadius:25,
     paddingTop:20,
@@ -25,38 +25,44 @@ const styles = StyleSheet.create({
   },
   // bar savings
   container_3: {
-    marginTop:10,
+    // marginTop:10,
     height:85,
-    marginBottom:20,
+    // marginBottom:0,
     width:"95%",
-    backgroundColor:COLORS.primary,
-    borderRadius:25
+    // backgroundColor:'#F8F8F8',
+    // borderWidth:3,
+    // borderColor:COLORS.dark,
+    // // borderRadius:15,
+    // borderTopColor:"transparent",
+    // borderLeftColor:"transparent",
+    // borderRightColor:"transparent"
+
   },
   container_4:{
     flex:1,
     marginBottom:550
   },
   header: {
-    fontSize: SIZES.xxxLarge,
-    color: COLORS.tertiary,
+    fontSize: SIZES.xxLarge,
+    color: COLORS.dark,
     fontWeight:"bold",
     marginLeft:25,
-    marginTop:80
+    marginTop:55
   },
   row: {
     flexDirection: "row",
     flex:1,
-    marginTop:5,
+    // marginTop:1,
     paddingLeft:5,
-    padding:8,
+    // padding:6,
     
     
     
   },
   row_2: {
     flexDirection: "row",
-    paddingLeft:5,
-    padding:3,
+    paddingLeft:1,
+    padding:2,
     marginTop:25,
     width:"95%",
     backgroundColor:COLORS.primary,
@@ -120,9 +126,7 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
+
   buttonClose: {
     backgroundColor: COLORS.tertiary,
   },
@@ -134,6 +138,14 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+  },
+  add_btn_container:{
+    
+    justifyContent:"center",
+    alignItems:"flex-end",
+
+    height:72,
+
   },
 });
 

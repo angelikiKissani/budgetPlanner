@@ -1,7 +1,7 @@
 
 // home screen
 import Summary from "./home/summary/summary";
-import ExpencesProgress from "./home/expencesprogress/expencesprogress";
+import ExpensesProgress from "./home/expensesprogress/expensesprogress";
 import Welcome from "./home/welcome/welcome";
 import SavingsProgress from "./home/savingsprogress/savingsprogress";
 
@@ -36,7 +36,7 @@ import ForgotPasswordI from "./authentication/forgotPassword/ForgotPasswordI";
 
 
 
-export {Welcome,Summary,ExpencesProgress,HeaderExpenses,Account_Info,General_settings,
+export {Welcome,Summary,ExpensesProgress,HeaderExpenses,Account_Info,General_settings,
         Savings,TabBtn,Button,SignUpButton,
         ForgotPasswordB,ForgotPasswordI,SavingsProgress,CategoryBtn};
 

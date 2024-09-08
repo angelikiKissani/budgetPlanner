@@ -28,7 +28,7 @@ const ForgotPassword = ({navigation}) => {
       return;
     }
     try{
-      const data= await axios.post("http://192.168.1.45:8001/api/forgotPassword",{email});
+      const data= await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/forgotPassword",{email});
       if (data.error) alert(data.error);
       else{
         setVisible(true); 
@@ -38,7 +38,7 @@ const ForgotPassword = ({navigation}) => {
 }
   const pressedPasswordReset =async () =>{
     try{
-      const resp= await axios.post("http://192.168.1.45:8001/api/resetPassword",{email,resetCode,password});
+      const resp= await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/resetPassword",{email,resetCode,password});
       if (data.error) alert(data.error);
       else{
         // alert("Now you can login with your new password!");

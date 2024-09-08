@@ -40,14 +40,14 @@ export default function ProfileScreen({navigation}) {
   }
   
 
-  const pressedBudgetPlan =()=>{
-    return (
-      navigation.navigate("MyBudgetPlan")
-    )
+  // const pressedBudgetPlan =()=>{
+  //   return (
+  //     navigation.navigate("MyBudgetPlan")
+  //   )
     
-  }
+  // }
   const pressedCategories =()=>{
-    router.push("screens/Categories")
+    navigation.navigate("Categories")
     
   }
 
@@ -60,9 +60,9 @@ export default function ProfileScreen({navigation}) {
   }
   
   return (
-    <SafeAreaProvider style={{flex:1,
+    <SafeAreaProvider style={{
       headerTitle:"",
-      backgroundColor:COLORS.white,}}>
+      backgroundColor:"#F5F5F5",}}>
     <Stack.Screen
           
           options={{
@@ -74,8 +74,8 @@ export default function ProfileScreen({navigation}) {
           <View style={{flex:1}}>
             <Account_Info/>
             
-{/* general sett */}
-            <ScrollView>
+      {/* general sett */}
+            <ScrollView  >
                 <View style={styles.container}>
                   <Text style={styles.title}>General</Text>
 
@@ -113,22 +113,19 @@ export default function ProfileScreen({navigation}) {
                   <View style={styles.container2}>
                   <Text style={styles.title}>Budget Settings</Text>
                   </View>
-                  <Settings_Btn icon_name={"budget_plan"} title={"Budget Plan"} subtitle={"Modify your Budget Plan"} onPress={pressedBudgetPlan}/>
+                  {/* <Settings_Btn icon_name={"budget_plan"} title={"Budget Plan"} subtitle={"Modify your Budget Plan"} onPress={pressedBudgetPlan}/> */}
                   <Settings_Btn icon_name={"categories"} title={"Categories"} subtitle={"Select categories for your expenses"} onPress={pressedCategories}/>
                   
-                  <Text>{"\n\n"}</Text>
+                  <Text>{"\n"}</Text>
+                  
                   <Settings_Btn icon_name={"logout"} title={"Sign Out"} style_logout={true} onPress={pressedSignOut}/>
-
+                  
                 </View>
             </ScrollView>
-
-
-
-
-
-            <FooterList/>
+            
           
-      </View>
+          </View>
+          <FooterList pressedAccount={true}/>
   </SafeAreaProvider>
   );
 }

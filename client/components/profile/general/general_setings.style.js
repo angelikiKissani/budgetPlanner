@@ -4,8 +4,9 @@ import { COLORS, SIZES } from "../../../constants";
 
 const styles = StyleSheet.create({
   container:{
+    
       marginLeft:35,
-      marginBottom:100
+      // marginBottom:0
       
   },
   container2:{

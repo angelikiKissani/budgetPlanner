@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-const userSchema = new Schema(
+import moment from "moment";
+const goalSchema = new Schema(
 {
     name: {
         type: String,
@@ -56,4 +57,16 @@ const userSchema = new Schema(
     },
     { timestamps: true }
 );
-export default mongoose.model("Goal", userSchema);
+
+goalSchema.methods.calculateMoneyPerMonth =function(){
+    const today =moment();
+    const finishDate = moment(this.finish_date, "DD-MM-YYYY");
+    if(today.month()>finishDate.month() && !(today.year()<finishDate.year())){
+        return
+    }
+    
+    const months_remaining = (finishDate.year()-today.year())*12 +(finishDate.month()-today.month())+1;
+    // console.log(this.name, (this.goal_money-this.progress)/months_remaining)
+    this.money_per_month = (this.goal_money-this.progress)/months_remaining;
+}
+export default mongoose.model("Goal", goalSchema);

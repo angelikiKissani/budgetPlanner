@@ -1,5 +1,5 @@
 import React from "react";
-import {View,Text,StyleSheet,Image,Pressable} from 'react-native'
+import {View,Text,StyleSheet,Image,Pressable, Touchable, TouchableOpacity} from 'react-native'
 
 
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
@@ -13,64 +13,91 @@ const Btn_progress=({icon_family,icon_name,onPress, progress,add_btn})=>{
 
 
     return(
-      <Pressable onPress={onPress} style={styles.container}>
+
+    add_btn?
+    <TouchableOpacity onPress={onPress} style={styles.add_btn_container}>
+        <IconSelector family={icon_family} color={COLORS.dark} icon={icon_name} size={31} />
+      </TouchableOpacity>
+    :
+    <Pressable onPress={onPress} style={styles.container}>
 
         <AnimatedCircularProgress
-        size={60}
-        width={4}
+        size={65}
+        width={6}
         fill={progress}
         rotation={0}
+        fillTransparency={false}
         tintColor={COLORS.dark}
+        
+        lineCap="round"
+        borderWidth={10}
+        style={{shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.20,
+          shadowRadius: 1.41,
+          
+          elevation: 2,}}
         // onAnimationComplete={() => console.log('onAnimationComplete')}
-        backgroundColor={COLORS.primary} >
+        backgroundColor={'#E0E0E0'}
+         >
         {
             () => (
-              <View style={add_btn? styles.add_btn_container : styles.col}>
-                <IconSelector family={icon_family} color={COLORS.dark} icon={icon_name} size={30} />
+              <View style={styles.col}>
+                <IconSelector family={icon_family} color={COLORS.dark} icon={icon_name} size={31} />
               </View>
             )
         }
         </AnimatedCircularProgress>
       
       </Pressable>
+  
+  
+     
     )
 
 }
 
 const styles=StyleSheet.create({
     container: {
-        paddingLeft:10
+        paddingLeft:5
       },
     col:  {
       backgroundColor:"white",
       borderRadius:50,
-      padding:10,
-      left:0
+      height:56,
+      width:56,
+      alignItems:"center",
+      justifyContent:"center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.22,
+      shadowRadius: 2.22,
+      
+      elevation: 3,
   
     },
     add_btn_container:{
-      marginHorizontal:0,
-      paddingTop:20,
       
+      justifyContent:"center",
       alignItems:"flex-end",
+      flexDirection:"row"
   
-      height:72,
-      borderLeftColor:"white",
-      borderRightColor:"transparent",
-      borderTopColor:"transparent",
-      borderBottomColor:"transparent",
-      borderWidth:1
+      // // height:100,
+      // borderLeftColor:"white",
+      // borderRightColor:"transparent",
+      // borderTopColor:"transparent",
+      // borderBottomColor:"transparent",
+      // borderWidth:1
   
-  
-    },
-    add_btn:{
-      marginLeft:10,
-      height:30,
-      width:30,
-      
-     
   
     },
+  
     
     
     

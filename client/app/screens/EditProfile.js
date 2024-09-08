@@ -65,17 +65,18 @@ const EditProfile = ({navigation}) => {
     let storedData =await AsyncStorage.getItem("auth-rn");
     const parsed =JSON.parse(storedData);
     // console.log(parsed.user)
-    const {data}= await axios.post("http://192.168.1.45:8001/api/upload-image",{image:base64Image,user:parsed.user });
+    const {data}= await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/upload-image",{image:base64Image,user:parsed.user });
     console.log("upload response=>",data);
 
 
     // update async storage with the new data
     const stored=JSON.parse(await AsyncStorage.getItem("auth-rn"));
     stored.user = data;
-    console.log(stored);
-    console.log(data);
+    // console.log(stored);
+    // console.log(data);
     await AsyncStorage.setItem("auth-rn",JSON.stringify(stored));
     setState({...state,user:data});
+    console.log(state);
     setImage(data.image);
 
     
@@ -101,8 +102,8 @@ const EditProfile = ({navigation}) => {
       setPassword(newPassword)
       let storedData = await AsyncStorage.getItem("auth-rn");
       const parsed = JSON.parse(storedData);
-      console.log(parsed)
-      const resp =await axios.post("http://192.168.1.45:8001/api/update-password",{password , user:parsed.user});
+      // console.log(parsed)
+      const resp =await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/update-password",{password , user:parsed.user});
       const data= resp.data;
       if(data.error) alert(data.error);
       else{ alert("Password updated successfully")}
@@ -119,11 +120,11 @@ const EditProfile = ({navigation}) => {
     
     try{
       var fname=name+" "+surname
-      
+      // console.log(fname);
       let storedData = await AsyncStorage.getItem("auth-rn");
       const parsed = JSON.parse(storedData);
-      console.log(fname)
-      const resp =await axios.post("http://192.168.1.45:8001/api/update-name",{name:fname , user:parsed.user});
+      // console.log(parsed.user)
+      const resp =await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/update-name",{name:fname , user:parsed.user});
       const data= resp.data;
 
       if(data.error) alert(data.error);
@@ -131,8 +132,8 @@ const EditProfile = ({navigation}) => {
 
       const stored=JSON.parse(await AsyncStorage.getItem("auth-rn"));
       stored.user = data;
-      console.log(stored);
-      console.log(data);
+      // console.log(stored);
+      // console.log(data);
       await AsyncStorage.setItem("auth-rn",JSON.stringify(stored));
       setState({...state,user:data});
 

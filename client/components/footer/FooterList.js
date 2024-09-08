@@ -1,26 +1,51 @@
-import { StyleSheet,Text,View } from "react-native";
-import React from "react";
+import { View,TouchableOpacity } from "react-native";
+import React,{useState} from "react";
 import FooterItem from "./FooterItem";
 import { COLORS } from "../../constants";
 import { useRoute,useNavigation } from "@react-navigation/native";
+import IconSelector from "../common/iconselection/IconSelector";
 
-const FooterList =()=>{
+const FooterList =({pressedHome,pressedExpenses,pressedAccount,pressedSavings})=>{
     const navigation = useNavigation();
     const route = useRoute();
+    // const [pressedHome, setPressedH] = useState();
+
+
+    // Handle press and toggle the pressed state
+
+
     return(
         <View 
             style={{
                 justifyContent:"space-evenly" ,
                 flexDirection:"row",
-                height:90,
+                height:80,
+                // paddingBottom:20,
+                // marginTop:4,
+                backgroundColor:"white",
+
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 1,
+                },
+                shadowOpacity: 0.22,
+                shadowRadius: 2.22,
                 
-                marginTop:20,
-                backgroundColor:COLORS.tertiary,
+                elevation: 3,
+                
+                borderColor:COLORS.gray,borderWidth:0.2,
                 }}>
-            <FooterItem name="home" screenName={"Home"} handlePress={() => navigation.navigate("Home")} routeName={route.name}/>
-            <FooterItem name="expenses" screenName={"ExpensesScreen"} handlePress={() => navigation.navigate("Expenses")} routeName={route.name}/>
-            <FooterItem name="savings" screenName={"SavingsScreen"} handlePress={() => navigation.navigate("Savings")} routeName={route.name}/>
-            <FooterItem name="account" screenName={"ProfileScreen"} handlePress={() => navigation.navigate("Profile")} routeName={route.name}/>
+            <FooterItem name="home-footer" handlePress={() => { navigation.navigate("Home")}} pressed={pressedHome}  />
+                                                                 
+            <FooterItem name="expenses-footer"  handlePress={() => {navigation.navigate("Expenses")}} pressed={pressedExpenses}  />
+            <FooterItem name="savings-footer" handlePress={() => {
+                                                                                    navigation.navigate("Savings")
+                                                                                    
+                                                                                
+                                                                                }}
+                                                                                pressed={pressedSavings}  />
+            <FooterItem name="account-footer" screenName={"ProfileScreen"} handlePress={() => navigation.navigate("Profile")} pressed={pressedAccount}/>
         </View>
     )
 }

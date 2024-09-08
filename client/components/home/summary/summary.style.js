@@ -6,10 +6,56 @@ const styles = StyleSheet.create({
   
 
   container: {
+    flexDirection:"row",
+    flex:1,
     width: "100%",
-    height:180,
-    paddingTop:40,
+    paddingTop:20,
     paddingLeft:20
+  },
+  container2:{
+    backgroundColor:"white",
+    marginRight:10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+    
+    elevation: 2,
+    
+  },
+  split:{
+    borderWidth:0.5,
+    marginHorizontal:50,
+    borderColor:"#D3D3D3",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+    
+    elevation: 2,
+  },
+  split2:{
+    borderWidth:0.5,
+    marginTop:10,
+    width:"90%",
+    marginLeft:20,
+    borderColor:"#D3D3D3",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+    
+    elevation: 2,
+
   },
   header: {
     fontSize: SIZES.large,
@@ -62,16 +108,17 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   title:{
-    fontSize: SIZES.xxxLarge,
-    color: "white",
+    fontSize: 39,
+    color: "black",
     fontWeight:"bold",
     marginTop:1
 
   },
   subtitle:{
-    fontSize: SIZES.small,
-    color: "white",
-    fontWeight:"bold",
+    fontSize: 18,
+    // fontStyle:"italic",
+    color:"#484848",
+    fontWeight:"700",
     marginTop:1
 
   }

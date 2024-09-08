@@ -18,18 +18,20 @@ import { AuthContext } from "../../context/auth"
 const Stack = createNativeStackNavigator()
 const NavigationScreen = ()=>{
     const [state,setState] = useContext(AuthContext)
-    const authenticated = state && state.token !== "" && state.user !==null;
+    const authenticated = state && state.token !== "" && state.user !==null && state.token!== undefined;
+    console.log("Authenticated:"+authenticated);
   return(
         <Stack.Navigator initialRouteName="SignIn" >
             {authenticated ? 
-            (<>
+            (
+            <>
               <Stack.Screen name="Home" component={Home} options={{gestureEnabled:false, headerShown: false,animation:"fade", animationDuration:"200"}}/>
               <Stack.Screen name="Expenses" component={ExpensesScreen} options={{ gestureEnabled:false, headerShown: false,animation:"fade", animationDuration:"200"}}/>
               <Stack.Screen name="Savings" component={SavingsScreen} options={{gestureEnabled:false,headerShown: false,animation:"fade", animationDuration:"200"}}/>
               <Stack.Screen name="Profile" component={ProfileScreen} options={{ gestureEnabled:false,headerShown: false,animation:"fade", animationDuration:"200"}}/>
               <Stack.Screen name="Categories" component={Categories} options={{gestureEnabled:false, headerShown: false,animation:"fade", animationDuration:"200"}}/>
               <Stack.Screen name="EditProfile" component={EditProfile} options={{ gestureEnabled:false,headerShown: false,animation:"fade", animationDuration:"200"}}/>
-              <Stack.Screen name="MyBudgetPlan" component={MyBydgetPlan} options={{gestureEnabled:false, headerShown: false,animation:"fade", animationDuration:"200"}}/>
+              {/* <Stack.Screen name="MyBudgetPlan" component={MyBydgetPlan} options={{gestureEnabled:false, headerShown: false,animation:"fade", animationDuration:"200"}}/> */}
                </>
             )
             :

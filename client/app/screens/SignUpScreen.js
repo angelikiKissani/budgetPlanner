@@ -25,7 +25,7 @@ const SignUpScreen = ({navigation}) => {
     name=data.name
     email=data.email
     password=data.password
-    const resp= await axios.post("http://192.168.1.45:8001/api/signup",{name,email,password})
+    const resp= await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/signup",{name,email,password})
     if (resp.data.error){
       alert(resp.data.error)
     }

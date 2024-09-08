@@ -13,6 +13,7 @@ const Welcome = ({navigation}) => {
 
   useEffect(()=>{
     if (state){
+      console.log(state);
       const {name,image } = state.user;
       fullName=name.split(" ");
       setName(fullName[0]);
@@ -29,14 +30,18 @@ const Welcome = ({navigation}) => {
   }
 
   return (
-    <ImageBackground source={icons.background3_2} style={[styles.image,{ height: height* 0.266,flex:1}]} imageStyle={{ borderBottomLeftRadius: 25,borderBottomRightRadius: 25}}>
+    
+    <ImageBackground source={icons.background3_2} style={[styles.image,{ height: height* 0.27}]} imageStyle={{ borderBottomLeftRadius: 35,borderBottomRightRadius: 35,bottom:15,flex:1}}>
       
       <ProfileB onPress={pressedProfileBtn} image={image}/>
       <View style={styles.container}>
-        <Text style={styles.userName}>Welcome Back,{"\n"}{name}!</Text>
+        <Text style={styles.welcomeBack}>Welcome back,</Text>
+        <Text style={styles.userName}>{name}!</Text>
       </View>
       
+      
     </ImageBackground>
+    
   )
 }
 
@@ -45,7 +50,7 @@ const ProfileB=({image,onPress})=> {
   return (
     <TouchableOpacity onPress={onPress}>
     <Image source={image} 
-           style={[styles.profilepic,{height:height*0.05,width:height*0.05}]}></Image>
+           style={[styles.profilepic,{height:height*0.043,width:height*0.043}]}></Image>
     
     </TouchableOpacity>
   )

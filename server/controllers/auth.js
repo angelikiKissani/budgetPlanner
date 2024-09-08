@@ -14,6 +14,7 @@ cloudinary.config({
 })
 
 import { createRequire } from "module";
+import { error } from "console";
 const require = createRequire(import.meta.url);
 
 // SENDGRID
@@ -64,7 +65,7 @@ export const signup = async (req, res) => {
             }).save();
 
             // create signed token
-            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {expiresIn: "7d"});
+            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {expiresIn: "1d"});
 
             // console.log(user);
 
@@ -85,27 +86,30 @@ export const signup = async (req, res) => {
 
 ///////////////SIGNIN/////////////
 export const signin = async (req, res) => {
-// console.log(req.body);
+console.log(req.body);
     try {
 
         const { email, password } = req.body;
 
         // check for the same email in our database
         const user = await User.findOne({ email });
-        console.log(user);
+        
         if (!user) {
-            return res.json({
-            error: "No user found",
-        });
+            
+            return (
+                res.status(404).json({ error: "No user found" })
+                
+            );
         }
 
         // check for the same password in our database
         const match = await comparePassword(password, user.password);
         
         if (!match) {
-            return res.json({
-            error: "Wrong password",
-        });
+            
+            // throw new Error("Wrong password")
+            return (
+                res.json({ error: "Wrong password" }));
         }
 
         // signed token
@@ -216,10 +220,13 @@ export const uploadImage =async (req,res)=>{
         // }
       
         return res.json({
+            _id:user._id,
             name: user.name,
             email:user.email,
             role:user.role,
             image:user.image,
+            savings:user.savings,
+            acounting_balance:user.acounting_balance
         })
     }catch(err){
         console.log(err);
@@ -231,9 +238,7 @@ export const updatePassword = async (req,res) =>{
    try{ 
         
         const password = req.body.password;
-        console.log(password);
         const hashedPassword = await hashPassword(password);
-        console.log(req.body.user)
         const user =await User.findByIdAndUpdate(
             req.body.user._id,
             {
@@ -266,10 +271,12 @@ export const updateName = async (req,res)=>{
             });
 
             return res.json({
+                _id:user._id,
                 name: user.name,
                 email:user.email,
                 role:user.role,
                 image:user.image,
+
             })
     }catch(err) {console.log(err)}
 

@@ -5,15 +5,15 @@ import { COLORS, SIZES } from "../../../constants";
 const styles = StyleSheet.create({
 
   container: {
+    flex:1,
     paddingTop:40,
     paddingLeft:20
   },
   container2: {
     marginTop:10,
     height:85,
+    // marginBottom:0,
     width:"95%",
-    backgroundColor:COLORS.primary,
-    borderRadius:25
   },
   header: {
     fontSize: SIZES.large,
@@ -23,18 +23,24 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    marginTop:5,
     paddingLeft:5,
-    padding:8,
+    flex:1,
+  },
+  add_btn_container:{
     
+    justifyContent:"center",
+    alignItems:"flex-end",
+
+    height:72,
+
   },
 
 
 
-  image:{
-    height:40,
-    width:40
-  },
+  // image:{
+  //   height:40,
+  //   width:40
+  // },
   col:  {
     backgroundColor:"white",
     borderRadius:50,
@@ -42,27 +48,8 @@ const styles = StyleSheet.create({
     left:0
 
   },
-  add_btn_container:{
-    marginHorizontal:10,
-    paddingTop:20,
-    position:"absolute",
-    right:0,
 
-    height:72,
-    borderLeftColor:"white",
-    borderRightColor:"transparent",
-    borderTopColor:"transparent",
-    borderBottomColor:"transparent",
-    borderWidth:1
-
-
-  },
-  add_btn:{
-    marginLeft:10,
-    height:30,
-    width:30
-
-  },
+ 
 
 });
 

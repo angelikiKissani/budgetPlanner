@@ -11,7 +11,7 @@ export default function SavingScreen() {
     <Stack.Screen options={{headerShadowVisible:false ,headerShown:false,}}/>
       <View style={{flex:1}}>
             <Savings/>
-            <FooterList/> 
+            <FooterList pressedSavings={true}/> 
       </View>
   </SafeAreaProvider>
   );
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   container:{
       flex:1,
       headerTitle:"",
-      backgroundColor:"white",
+      backgroundColor:"#F0F0F0",
       
   },
 

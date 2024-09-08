@@ -1,31 +1,40 @@
-import React from 'react'
+import React,{useContext, useEffect, useState} from 'react'
 import { View, Text } from 'react-native'
-
+import { AuthContext } from '../../../context/auth'
 import styles from './summary.style'
 
 
-const Row = ({ children }) => (
-  <View style={styles.row}>{children}</View>
-)
-
 
 const Summary = () => {
+  const [balance1,setBalance]=useState()
+  const [savings1,setSavings]=useState()
+  const [state,setState]=useContext(AuthContext)
+
+  useEffect(()=>{
+    if (state){
+      setBalance(state.user.accounting_balance);
+      setSavings(state.user.savings);  
+    }
+  } , [state] )
   return (
+    <View>
     <View style={styles.container}>
-      <Text style={styles.header}>Status</Text>
-      <View>
-        <Row>
-            <View style={styles.col1}>
-              <Text style={styles.title}>1349.89 €</Text>
-              <Text style={styles.subtitle}>Available Balance</Text>
-            </View>
-            <View style={styles.col2}>
-              <Text style={styles.title}>349.98 €</Text>
-              <Text style={styles.subtitle}>Savings</Text>
-            </View>
-        </Row>
-      </View>
+      
+           
+              <View>
+                <Text style={styles.subtitle}>Total Balance</Text>
+                <Text style={styles.title}>€{balance1}</Text>
+              </View>
+              <View style={styles.split}></View>
+              <View>
+                <Text style={styles.subtitle}>Savings</Text>
+                <Text style={styles.title}>{savings1} €</Text>
+              </View>
+        
     </View>
+    <View style={styles.split2}></View>
+    </View>
+              
     
   )
 }

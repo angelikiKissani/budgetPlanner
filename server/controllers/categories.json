@@ -1,6 +1,4 @@
-{
-    "categories": [
-        {
+        [{
              "name": "Household"
            
         },
@@ -161,7 +159,6 @@
         },
         {
             "name": "I can't remember"
-        },
+        }
         
     ]
-}

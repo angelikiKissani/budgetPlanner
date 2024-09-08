@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     },
     date_container:{
         marginTop:15,
-        backgroundColor:COLORS.light_secondary,
+        backgroundColor:"#afc3c4",
         height:32,
         width:"110%",
         left: -20,
@@ -60,13 +60,16 @@ const styles = StyleSheet.create({
     },
     description_container:{
         flexDirection:"row",
-        flex:0.94,
+        flex:1,
+        marginHorizontal:15,
         justifyContent:"flex-start",
         alignItems:"center",
         marginTop:3
     },
     category_container:{
-        marginHorizontal:10,
+        
+        marginHorizontal:7,
+        
         backgroundColor:COLORS.warm,
         paddingHorizontal: 12,
         paddingVertical: 7,
@@ -74,6 +77,7 @@ const styles = StyleSheet.create({
 
     },
     price_container:{
+        // flex:0.3
         
 
     },
@@ -100,7 +104,44 @@ const styles = StyleSheet.create({
         fontWeight:"500",
         marginTop:1
 
-    }
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 100,
+        // top:6
+        
+      },
+      modalView: {
+        backgroundColor: 'white',
+        borderRadius: 20,
+        paddingHorizontal: 15,
+        paddingVertical: 15,
+        paddingBottom:35,
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        borderWidth:0.4,
+        borderColor:COLORS.gray,
+        
+        elevation: 4,
+      },
+      button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        margin:10
+      },
+    
+      buttonClose: {
+        backgroundColor: COLORS.tertiary,
+      },
 
 })
 

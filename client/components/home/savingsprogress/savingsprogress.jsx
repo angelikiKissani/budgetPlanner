@@ -1,13 +1,13 @@
 import React,{useContext,useEffect,useState} from 'react'
-import { View, Text,Image,ScrollView } from 'react-native'
-import { COLORS, icons } from '../../../constants'
+import { View, Text,ScrollView,TouchableOpacity } from 'react-native'
+
 import styles from './savingsprogress.style'
-import { router } from 'expo-router'
 import Btn_progress from "./Btn_progress"
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios';
 import { GoalContext } from '../../../context/goals';
 import { AuthContext } from '../../../context/auth'
+import { COLORS } from '../../../constants'
+import IconSelector from '../../common/iconselection/IconSelector'
 
 
 
@@ -24,7 +24,6 @@ const [user,setUser] =useState();
   }, [user]);  
   useEffect(()=>{
     if (state){
-      console.log(state.user);
       setUser(state.user);
       
       
@@ -33,10 +32,7 @@ const [user,setUser] =useState();
 
 
   const fetchGoals = async() =>{
-    console.log(user)
-    // let storedData =await AsyncStorage.getItem("auth-rn");
-    // const parsed =JSON.parse(storedData);
-    const {data}=await axios.post("http://192.168.1.45:8001/api/show-goal",{user_id:user._id})
+     const {data}=await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/show-goal",{user_id:user._id})
     setGoals(data)
 
   }
@@ -52,21 +48,24 @@ const [user,setUser] =useState();
     <View style={styles.container}>
     <Text style={styles.header}>Savings</Text>
     <View style={styles.container2}>
-      <View style={styles.row}>
-      <ScrollView style={{flex:1,flexDirection:"row"}} horizontal={true}>
-            {goals && goals.map( item=>(
-              <View key={item._id}>
-                <Btn_progress icon_family={item.icon_family} icon_name={item.icon_name} onPress={pressedBtn} progress={Number(item.progress)*100/ Number(item.goal_money)} />
-                </View>
+            <View style={styles.row}>
+              <ScrollView style={{flex:1,flexDirection:"row"}} horizontal={true}>
+                {goals && goals.map( item=>(
+                  <View key={item._id}>
+                    <Btn_progress icon_family={item.icon_family} icon_name={item.icon_name} progress={Number(item.progress)*100/ Number(item.goal_money)} />
+                  </View>
                 ))}
               
                </ScrollView>
-            <Btn_progress icon_family={"MaterialIcon"} icon_name={"add"} progress={0} onPress={pressedBtn} add_btn={true} />
+               <View style={{borderWidth:1,borderColor:COLORS.dark,height:60,alignSelf:"center",bottom:8,}}></View>
+              <TouchableOpacity style={styles.add_btn_container} onPress={pressedBtn}>
+                <IconSelector family={"MaterialIcon"} color={COLORS.dark} icon={"add"} size={31} />
+              </TouchableOpacity>
             
-      
-        </View>
-    </View>
-  </View>
+           </View>
+          </View></View>
+  
+  
   )
 }
 

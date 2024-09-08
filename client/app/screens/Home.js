@@ -1,8 +1,8 @@
-import { StyleSheet,View, Text } from 'react-native';
+import { StyleSheet,View, Text, ScrollView } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
 
-import {Welcome,Summary,ExpencesProgress, SavingsProgress} from "../../components"
+import {Welcome,Summary,ExpensesProgress, SavingsProgress} from "../../components"
 import FooterList from '../../components/footer/FooterList';
 
 
@@ -21,10 +21,14 @@ export default function Home({navigation}) {
             <View style={{flex:1}}>
             
             <Welcome navigation={navigation}/>
-            <Summary/>
-            <ExpencesProgress navigation={navigation}/>
-            <SavingsProgress navigation={navigation}/>
-            <FooterList/>
+            <ScrollView style={{flex:1}} >
+              <Summary/>
+              <ExpensesProgress/>
+              <SavingsProgress navigation={navigation}/>
+              
+              
+            </ScrollView>
+            <FooterList pressedHome={true}/>
         </View>
     </SafeAreaProvider>
   );
