@@ -16,24 +16,23 @@ const HeaderExpenses = () => {
   var transaction = [];
   const customData = require("../data.json");
 
+  //REFRESH PAGE
+  const [refresh, setRefresh] = useState(false);
+  const onRefresh = useCallback( () => {
+    setRefresh(true);
+    setTimeout(()=>{
+      setRefresh(false)
+    },2000)
 
-//refresh page
-const [refresh, setRefresh] = useState(false);
-const onRefresh = useCallback( () => {
-  setRefresh(true);
-  setTimeout(()=>{
-    setRefresh(false)
-  },2000)
-
-}, [] );
-  useEffect(()=>{
-    fetchTransactions();
-  },[refresh])
-  useFocusEffect(
-    useCallback(() => {
+  }, [] );
+    useEffect(()=>{
       fetchTransactions();
-    }, [])
-  );
+    },[refresh])
+    useFocusEffect(
+      useCallback(() => {
+        fetchTransactions();
+      }, [])
+    );
 
   
   const fetchTransactions = async ()=>{
@@ -44,6 +43,9 @@ const onRefresh = useCallback( () => {
 
 
   }
+
+
+  // PREPARE TO SHOW THE DATA
   for (let i=0, k=0; i<transactions.length ; i++ , k++ ){
     if(i==0 || transactions[i]["date"]!=transactions[i-1]["date"]){
       transaction.splice(0,0,
@@ -68,12 +70,6 @@ const onRefresh = useCallback( () => {
 
   
   }
-
-
-
-    
-  
-  
 
   return (
      <View style={styles.container}>
