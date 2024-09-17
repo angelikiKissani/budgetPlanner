@@ -63,7 +63,7 @@ const Savings = () => {
    const fetchGoals = async() =>{
     let storedData =await AsyncStorage.getItem("auth-rn");
     const parsed =JSON.parse(storedData);
-    console.log(parsed)
+    // console.log(parsed)
     const {data}=await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/show-goal",{user_id:parsed.user._id})
     setGoals(data)
   }

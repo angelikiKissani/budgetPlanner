@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   split:{
     borderWidth:0.5,
-    marginHorizontal:50,
+    marginHorizontal:35,
     borderColor:"#D3D3D3",
     shadowColor: "#000",
     shadowOffset: {

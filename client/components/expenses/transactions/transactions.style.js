@@ -66,6 +66,16 @@ const styles = StyleSheet.create({
         alignItems:"center",
         marginTop:3
     },
+    goal_container:{
+        
+        marginHorizontal:7,
+        
+        backgroundColor:COLORS.primary,
+        paddingHorizontal: 12,
+        paddingVertical: 7,
+        borderRadius:25
+
+    },
     category_container:{
         
         marginHorizontal:7,
@@ -109,7 +119,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 100,
+        marginVertical: 340,
         // top:6
         
       },
@@ -117,8 +127,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 20,
         paddingHorizontal: 15,
-        paddingVertical: 15,
-        paddingBottom:35,
+        paddingVertical: 3,
+        
         alignItems: 'center',
         shadowColor: "#000",
         shadowOffset: {
@@ -140,7 +150,9 @@ const styles = StyleSheet.create({
       },
     
       buttonClose: {
-        backgroundColor: COLORS.tertiary,
+        marginBottom:25,
+        marginTop:20,
+        alignItems:"center"
       },
 
 })

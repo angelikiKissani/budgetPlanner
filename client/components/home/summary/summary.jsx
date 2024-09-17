@@ -28,7 +28,7 @@ const Summary = () => {
               <View style={styles.split}></View>
               <View>
                 <Text style={styles.subtitle}>Savings</Text>
-                <Text style={styles.title}>{savings1} €</Text>
+                <Text style={styles.title}>€{savings1}</Text>
               </View>
         
     </View>

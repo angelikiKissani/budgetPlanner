@@ -13,7 +13,7 @@ const Welcome = ({navigation}) => {
 
   useEffect(()=>{
     if (state){
-      console.log(state);
+      // console.log(state);
       const {name,image } = state.user;
       fullName=name.split(" ");
       setName(fullName[0]);

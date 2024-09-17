@@ -16,7 +16,7 @@ const Goal = ({icon_name,icon_family,goal_name,start_date,finish_date,progress,g
     
     const [visible,setVisible] =useState();
     const [addMoney,setAddMoney] =useState();
-    const [newAdd,setNewAdd] =useState();
+    const [newAdd,setNewAdd] =useState(0);
     const [finishDate,setFinishDate]=useState("");
     const [startDate,setStartDate]=useState("");
     const [name,setName]=useState('');
@@ -59,8 +59,14 @@ const Goal = ({icon_name,icon_family,goal_name,start_date,finish_date,progress,g
     //Add money to your goal
     const pressedDone = async()=>{
         // console.log(newAdd);
-        if(newAdd==undefined){setAddMoney(false);}
-        else if((progress+newAdd)>goal_money) {
+        let addValue = parseFloat(newAdd);
+        if (isNaN(addValue) || addValue <= 0) {
+            setAddMoney(false);
+            setNewAdd(0);
+            return;
+        }
+        if(addValue==undefined){setAddMoney(false);}
+        else if((progress+addValue)>goal_money) {
             Alert.alert("Your goal is "+goal_money+"€. You can not add more money.")
             setNewAdd(0);
         }
@@ -69,7 +75,7 @@ const Goal = ({icon_name,icon_family,goal_name,start_date,finish_date,progress,g
             
             let storedData =await AsyncStorage.getItem("auth-rn");
             const parsed =JSON.parse(storedData);
-            const {data}= await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/add-money-goal",{name:goal_name,saved_this_month:(saved_this_month+newAdd),newAdd:newAdd,progress:(progress+newAdd),user_id:parsed.user._id });
+            const {data}= await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/add-money-goal",{name:goal_name,saved_this_month:(saved_this_month+addValue),newAdd:addValue,progress:(progress+addValue),user_id:parsed.user._id });
             setNewAdd(0);
             setAddMoney(false);
             console.log(data.user)
@@ -77,7 +83,7 @@ const Goal = ({icon_name,icon_family,goal_name,start_date,finish_date,progress,g
             stored.user = data;
             await AsyncStorage.setItem("auth-rn",JSON.stringify(stored));
             setState({...state,user:data});
-            console.log(state)
+            // console.log(state)
         }
 
         onRefresh();  
@@ -179,14 +185,41 @@ const Goal = ({icon_name,icon_family,goal_name,start_date,finish_date,progress,g
                             <View style={{flex:1,flexDirection:"row",height:55,marginHorizontal:10,marginBottom:5,alignItems:"center"}}>
                                 
                                 <TouchableOpacity style={{width:"30%"}}onPress={()=>{   if(newAdd==undefined||newAdd==0){setNewAdd(-1)}
-                                                                                        else{setNewAdd(newAdd-1);}}} >
+                                                                                        else{setNewAdd(parseFloat((newAdd - 1).toFixed(2)))}}} >
                                 <Ionicons name="remove-circle-sharp" size={30} color={COLORS.tertiary} style={{alignSelf:"flex-end"}}   />
                                 </TouchableOpacity>
-                                <TextInput inputMode={'numeric'} value={newAdd==undefined ? "0" : newAdd.toString()} textAlign='center' onChangeText={(num)=>{setNewAdd(Number(num))}} keyboardType='numeric' style={{width:"27%",marginRight:10,fontSize:25}} >
+                                
+                                <TextInput   keyboardType='decimal-pad'
+                                            inputMode='decimal'
+                                            value={newAdd==undefined ? "0": (newAdd).toString()}
+                                             
+                                            onChangeText={(num) => {
+                                                console.log(typeof(num))
+                                                console.log(num)
+                                                // setNewAdd(parseFloat($(num).text().replace(',', '.')))
+                                                if (num === '' || num.slice=== ',' || num === '-.') {
+                                                    setNewAdd(0);
+                                                    
+                                                } 
+                                                else if(num.slice(-1) === ','){
+                                                    setNewAdd(num.replace(/,/, '.'));
+                                                }
+                                                
+                                                else {
+                                                    var newN=num.replace(/,/, '.')
+                                                    console.log(newN)
+                                                    const parsedNum = parseFloat(newN)
+                                                    console.log(parsedNum)
+                                                    setNewAdd(isNaN(parsedNum) ? 0 : parsedNum);
+                                                }
+                                            }}
+
+                                            textAlign='center' 
+                                             style={{width:"27%",marginRight:10,fontSize:25}} >
                     
                                 </TextInput>
                                 <TouchableOpacity style={{width:"30%"}} onPress={()=>{if(newAdd==undefined){setNewAdd(1)}
-                                                                                    else{setNewAdd(newAdd+1);}}}>
+                                                                                    else{setNewAdd(parseFloat((newAdd + 1).toFixed(2)))}}}>
                                     <Ionicons name="add-circle-sharp" size={30} color={COLORS.tertiary} style={{alignSelf:"flex-start"}}  />
                                 </TouchableOpacity>
                                 <Ionicons name="checkmark-sharp" size={30} color={COLORS.tertiary} style={{alignSelf:"flex-end"}} onPress={pressedDone} />

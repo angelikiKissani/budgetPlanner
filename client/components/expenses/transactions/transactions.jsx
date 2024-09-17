@@ -5,29 +5,35 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import styles from './transactions.style'
 import { COLORS } from '../../../constants'
 import IconSelector from "../../common/iconselection/IconSelector"
-import { SIZES } from '../../../constants';
 import CategoryBtn from '../../common/categories/CategoryBtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
-import SearchBar from '../search_bar/search_bar';
 
 
 
 
-const Transactions = ({description,price,category,date,time,onRefresh}) => {
-  // const data = require("../../common/categories/categories.json");
-  // var categoryArray = [];
+const Transactions = ({description,price,category,goal,date,time,onRefresh,id}) => {
+
   const [categoryModalVisible,setCategoryModalVisible]=useState(false);
   const [categories,setCategories]=useState([]);
+  const [goals,setGoals]=useState([]);
+  const [isGoal,setIsGoal]=useState(false);
+  
+
+  useEffect(()=>{
+    if (goal==undefined|| (goal.goal_name=="" &&goal.goal_id=="")){
+      setIsGoal(false);
+    }
+    else setIsGoal(true)
+  })
   
   const pressedAddCategory = ()=>{
     setCategoryModalVisible(true)
     fetchCategories();
+    fetchGoals();
   }
 
   
-
-    
 
   const fetchCategories = async ()=>{
     let storedData =await AsyncStorage.getItem("auth-rn");
@@ -37,15 +43,46 @@ const Transactions = ({description,price,category,date,time,onRefresh}) => {
 
 
   } 
-
-
-
-  const pressedCategory = async (category_name)=>{
+  const fetchGoals = async() =>{
     let storedData =await AsyncStorage.getItem("auth-rn");
     const parsed =JSON.parse(storedData);
-    const {result}=await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/add-category",{category:category_name,description:description,user_id:parsed.user._id})
-    setCategoryModalVisible(false)
+    const {data}=await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/show-goal",{user_id:parsed.user._id})
+    var data_goals=data.map(item=>[item._id,item.name])
+    console.log(data_goals)
+    setGoals(data_goals)
     
+  }
+
+
+
+  // const pressedCategory = async (category_name)=>{
+  //   let storedData =await AsyncStorage.getItem("auth-rn");
+  //   const parsed =JSON.parse(storedData);
+  //   const {result}=await axios.post("http://172.20.10.3:8001/api/add-category",{category:category_name,description:description,user_id:parsed.user._id,price:-price,transaction_id:id})
+  //   setCategoryModalVisible(false)
+    
+  //   onRefresh()
+
+  // }
+  const pressedRemove = async ()=>{
+    let storedData =await AsyncStorage.getItem("auth-rn");
+    const parsed =JSON.parse(storedData);
+    const result=await axios.post("http://172.20.10.3:8001/api/remove-goal",{transaction_id:id  ,price:-price,user_id:parsed.user._id})
+    console.log(result.data)
+    
+    setCategoryModalVisible(false)
+    onRefresh()
+
+  }
+
+
+  const pressedGoal = async (goal_name)=>{
+    let storedData =await AsyncStorage.getItem("auth-rn");
+    const parsed =JSON.parse(storedData);
+    const result=await axios.post("http://172.20.10.3:8001/api/add-goal-category",{goal_name:goal_name,user_id:parsed.user._id,price:-price,transaction_id:id})
+    console.log(result.data)
+    
+    setCategoryModalVisible(false)
     onRefresh()
 
   }
@@ -62,31 +99,38 @@ const Transactions = ({description,price,category,date,time,onRefresh}) => {
         }}>
           <View style={styles.centeredView}>
               <View style={styles.modalView}>
-              <Pressable
-                  style={{alignSelf:"flex-end"}}
-                  onPress={() => setCategoryModalVisible(!categoryModalVisible)}>
-                  <IconSelector icon={"close"} family={"AntDesign"} size={20} color={COLORS.dark}/>
-                </Pressable>
-              <View style={{alignItems:"center"}}>
-              <Text style={[styles.text1,{marginBottom:25}]}> Select Category</Text>
-              <View style={{width:350,left:15}}>
-             
-              </View>
+                <Pressable
+                    style={{alignSelf:"flex-end",left:15,width:50,height:50,alignContent:"flex-end",justifyContent:"flex-end"}}
+                    onPress={() => setCategoryModalVisible(!categoryModalVisible)}>
+                    <IconSelector icon={"close"} family={"AntDesign"} size={20} color={COLORS.dark}/>
+                  </Pressable>
+                <Text style={[styles.text1,{marginBottom:20,left:10,alignSelf:"flex-start"}]}> Spend money from your goal:</Text>
+                
                 <ScrollView>
-                  <View style={{width:350,flexDirection:"row",flexWrap:"wrap",justifyContent:"center"}}>
-                  {categories && categories
-                  .sort((a, b) => a.name.localeCompare(b.name))
-                  .map(item=>(
+                  <View style={{width:350,flexDirection:"row",flexWrap:"wrap",justifyContent:"center",marginBottom:25}}>
+                    {goals && goals
+                      .map(item=>(
 
-                  <CategoryBtn key={item._id} category_name={item.name} onPress={()=>pressedCategory(item.name)} />
-                ))}
+                      <CategoryBtn key={item[0]} category_name={item[1]} goal={true} onPress={()=>pressedGoal(item[1])} />
+                    ))}
+                        
                   </View>
+                  {/* <View style={{width:350,flexDirection:"row",flexWrap:"wrap",justifyContent:"center"}}>
+                  {categories && categories
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map(item=>(
+
+                    <CategoryBtn key={item._id} goal={false} category_name={item.name} onPress={()=>pressedCategory(item.name,price)} />
+                  ))}
+                  </View> */}                
                 </ScrollView>
+                <Pressable style={styles.buttonClose} onPress={pressedRemove}>
+                  <Text style={[styles.text1,{textDecorationLine:"underline"}]}>Remove goal</Text>
+                  
+                </Pressable>
               
             
 
-                
-                </View>
               </View>
             </View>
           
@@ -103,19 +147,30 @@ const Transactions = ({description,price,category,date,time,onRefresh}) => {
             <Text style={styles.text1}>{description}</Text>
             <Text style={styles.date_text}>{date} {time}</Text>
           </View> 
-          {price>0 ?<></>:
-          (category==undefined|| price>0 ?
+          {isGoal?
             <>
-            <TouchableOpacity style={{padding:15}} onPress={pressedAddCategory}>
-              <IconSelector icon={"add-category"}></IconSelector>
+            <TouchableOpacity style={styles.goal_container} onPress={pressedAddCategory}>
+              <Text style={styles.text2}>{goal.goal_name}</Text>
             </TouchableOpacity>
             </>
-          :
-          <TouchableOpacity style={styles.category_container} onPress={pressedAddCategory}>
-            <Text style={styles.text2}>{category}</Text>
-          </TouchableOpacity> 
-          )
+            :
+            <>
+              {price>0 ?<></>:
+                (category==undefined|| price>0 ?
+                  <>
+                  <TouchableOpacity style={{padding:15}} onPress={pressedAddCategory}>
+                    <IconSelector icon={"add-category"}></IconSelector>
+                  </TouchableOpacity>
+                  </>
+                :
+                <TouchableOpacity style={styles.category_container} onPress={pressedAddCategory}>
+                  <Text style={styles.text2}>{category}</Text>
+                </TouchableOpacity> 
+                )
+              }
+            </>
           }
+          
           
         </View>
         <View style={styles.price_container}>

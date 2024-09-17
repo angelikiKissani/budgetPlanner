@@ -76,7 +76,7 @@ const EditProfile = ({navigation}) => {
     // console.log(data);
     await AsyncStorage.setItem("auth-rn",JSON.stringify(stored));
     setState({...state,user:data});
-    console.log(state);
+    // console.log(state);
     setImage(data.image);
 
     

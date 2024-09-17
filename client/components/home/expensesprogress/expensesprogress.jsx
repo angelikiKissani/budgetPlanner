@@ -3,9 +3,10 @@ import { View, Text,Image,Dimensions, ScrollView,RefreshControl } from 'react-na
 import { useFocusEffect } from '@react-navigation/native'
 import styles from './expensesprogress.style'
 import {AuthContext} from "../../../context/auth"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios';
-import {LineChart,BarChart} from "react-native-chart-kit";
-import { COLORS, SIZES } from '../../../constants';
+import {BarChart} from "react-native-chart-kit";
+import { COLORS } from '../../../constants';
 
 
 const ExpensesProgress = () => {
@@ -37,7 +38,11 @@ const ExpensesProgress = () => {
   const fetchTransactions = async (user_id)=>{
     try{
       const {data}=await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/fetch-transaction",{user_id: user_id})
-      setTransactions(data.result)
+      setTransactions(data.result1)
+      const stored= JSON.parse(await AsyncStorage.getItem("auth-rn"));
+      stored.user=data.user;
+      await AsyncStorage.setItem("auth-rn",JSON.stringify(stored));
+      setState({...state,user:data.user})
     }catch(err) {console.log('Error fetching transactions:', err);}
     
   

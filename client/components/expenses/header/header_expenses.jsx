@@ -39,14 +39,21 @@ const HeaderExpenses = () => {
     let storedData =await AsyncStorage.getItem("auth-rn");
     const parsed =JSON.parse(storedData);
     const {data}=await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/fetch-transaction",{user_id:parsed.user._id})
-    setTransactions({data}.data.result)
+    setTransactions(data.result1)
 
+    const stored= JSON.parse(await AsyncStorage.getItem("auth-rn"));
+    stored.user=data.user;
+    await AsyncStorage.setItem("auth-rn",JSON.stringify(stored));
+    setState({...state,user:data.user})
+    
+    // setState({..state,user.})
 
   }
 
 
   // PREPARE TO SHOW THE DATA
   for (let i=0, k=0; i<transactions.length ; i++ , k++ ){
+ 
     if(i==0 || transactions[i]["date"]!=transactions[i-1]["date"]){
       transaction.splice(0,0,
         <View key={k}>
@@ -55,7 +62,7 @@ const HeaderExpenses = () => {
       )
       transaction.splice(1,0,
         <View key={k+1}>
-        <Transactions onRefresh={onRefresh} description={transactions[i]["description"]} time={transactions[i]["time"]} date={transactions[i]["date"]} category={transactions[i]["category"]} price={transactions[i]["price"]} />
+        <Transactions onRefresh={onRefresh} id={transactions[i]["transaction_id"]} description={transactions[i]["description"]} goal={transactions[i]["goal"]}  time={transactions[i]["time"]} date={transactions[i]["date"]} category={transactions[i]["category"]} price={transactions[i]["price"]} />
         </View>
       )
       k+=1
@@ -64,7 +71,7 @@ const HeaderExpenses = () => {
     else{
       transaction.splice(1,0,
         <View key={k}>
-        <Transactions onRefresh={onRefresh} description={transactions[i]["description"]} time={transactions[i]["time"]}  date={transactions[i]["date"]} category={transactions[i]["category"]} price={transactions[i]["price"]} />
+        <Transactions onRefresh={onRefresh} id={transactions[i]["transaction_id"]} description={transactions[i]["description"]} goal={transactions[i]["goal"]}  time={transactions[i]["time"]}  date={transactions[i]["date"]} category={transactions[i]["category"]} price={transactions[i]["price"]} />
         </View>
       )}
 

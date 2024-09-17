@@ -5,11 +5,11 @@ import { COLORS,SIZES } from '../../../constants'
 
 
 
-const CategoryBtn = ({category_name,onPress}) => {
+const CategoryBtn = ({category_name,onPress,goal}) => {
   return (
     <TouchableOpacity 
         onPress={onPress}
-        style={styles.category_container}
+        style={goal? styles.goal_container: styles.category_container}
         >
             <Text style={styles.text}>{category_name}</Text>
         
@@ -29,11 +29,19 @@ const styles = StyleSheet.create({
         borderRadius:25
     
     },
-        text:{
-            color:"white",
-            fontSize:16,
-            fontWeight:"700"
-        },
+    goal_container:{
+      margin:4,
+      backgroundColor:COLORS.primary,
+      paddingHorizontal: 12,
+      paddingVertical: 7,
+      borderRadius:25
+  
+  },
+    text:{
+        color:"white",
+        fontSize:16,
+        fontWeight:"700"
+    },
     
 });
 
