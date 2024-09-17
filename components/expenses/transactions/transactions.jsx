@@ -67,7 +67,7 @@ const Transactions = ({description,price,category,goal,date,time,onRefresh,id}) 
   const pressedRemove = async ()=>{
     let storedData =await AsyncStorage.getItem("auth-rn");
     const parsed =JSON.parse(storedData);
-    const result=await axios.post("http://172.20.10.3:8001/api/remove-goal",{transaction_id:id  ,price:-price,user_id:parsed.user._id})
+    const result=await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/remove-goal",{transaction_id:id  ,price:-price,user_id:parsed.user._id})
     console.log(result.data)
     
     setCategoryModalVisible(false)
@@ -79,7 +79,7 @@ const Transactions = ({description,price,category,goal,date,time,onRefresh,id}) 
   const pressedGoal = async (goal_name)=>{
     let storedData =await AsyncStorage.getItem("auth-rn");
     const parsed =JSON.parse(storedData);
-    const result=await axios.post("http://172.20.10.3:8001/api/add-goal-category",{goal_name:goal_name,user_id:parsed.user._id,price:-price,transaction_id:id})
+    const result=await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/add-goal-category",{goal_name:goal_name,user_id:parsed.user._id,price:-price,transaction_id:id})
     console.log(result.data)
     
     setCategoryModalVisible(false)
