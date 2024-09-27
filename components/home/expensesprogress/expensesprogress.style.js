@@ -17,15 +17,17 @@ const styles = StyleSheet.create({
   },
 
   container: {
+    
     width: "100%",
     marginTop:30,
     paddingLeft:20,
   },
   container2:{
+    alignContent:"center",
     borderRadius:15,
     
     paddingTop:10,
-    marginEnd:40,
+    marginEnd:20,
     marginTop:10,
     backgroundColor:"white",
     shadowColor: "#000",

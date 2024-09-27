@@ -13,8 +13,10 @@ import {TransactionContext} from "../../../context/transaction"
 const HeaderExpenses = () => {
   const [state,setState] = useContext(AuthContext);
   const [transactions,setTransactions]=useContext(TransactionContext)
-  var transaction = [];
-  const customData = require("../data.json");
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(''); // Add state for the search term
+  let transactionList = [];
+  
 
   //REFRESH PAGE
   const [refresh, setRefresh] = useState(false);
@@ -40,6 +42,8 @@ const HeaderExpenses = () => {
     const parsed =JSON.parse(storedData);
     const {data}=await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/fetch-transaction",{user_id:parsed.user._id})
     setTransactions(data.result1)
+    setFilteredTransactions(data.result1); 
+
 
     const stored= JSON.parse(await AsyncStorage.getItem("auth-rn"));
     stored.user=data.user;
@@ -49,38 +53,78 @@ const HeaderExpenses = () => {
     // setState({..state,user.})
 
   }
+  const handleSearch = (text) => {
+    setSearchTerm(text);
+
+    if (text === '') {
+      setFilteredTransactions(transactions); // If search is empty, show all transactions
+    } else {
+      const filteredData = transactions.filter((transaction) =>
+        (transaction.description?.toLowerCase() || '').includes(text.toLowerCase()) ||
+        (transaction.category?.toLowerCase() || '').includes(text.toLowerCase())
+      );
+      setFilteredTransactions(filteredData); // Update filtered transactions
+    }
+  };
 
 
-  // PREPARE TO SHOW THE DATA
-  for (let i=0, k=0; i<transactions.length ; i++ , k++ ){
- 
-    if(i==0 || transactions[i]["date"]!=transactions[i-1]["date"]){
-      transaction.splice(0,0,
+
+  for (let i=0, k=0; i<filteredTransactions.length ; i++ , k++ ){
+    
+    if(i==0 || filteredTransactions[i]["date"]!=filteredTransactions[i-1]["date"]){
+      transactionList.splice(0,0,
         <View key={k}>
-        <Change_date date={transactions[i]["date"]}/>
+        <Change_date date={filteredTransactions[i]["date"]}/>
         </View>
       )
-      transaction.splice(1,0,
+      transactionList.splice(1,0,
         <View key={k+1}>
-        <Transactions onRefresh={onRefresh} id={transactions[i]["transaction_id"]} description={transactions[i]["description"]} goal={transactions[i]["goal"]}  time={transactions[i]["time"]} date={transactions[i]["date"]} category={transactions[i]["category"]} price={transactions[i]["price"]} />
+        <Transactions onRefresh={onRefresh} id={filteredTransactions[i]["transaction_id"]} description={filteredTransactions[i]["description"]} goal={filteredTransactions[i]["goal"]}  time={filteredTransactions[i]["time"]} date={filteredTransactions[i]["date"]} category={filteredTransactions[i]["category"]} price={filteredTransactions[i]["price"]} />
         </View>
       )
       k+=1
       
     }
     else{
-      transaction.splice(1,0,
+      transactionList.splice(1,0,
         <View key={k}>
-        <Transactions onRefresh={onRefresh} id={transactions[i]["transaction_id"]} description={transactions[i]["description"]} goal={transactions[i]["goal"]}  time={transactions[i]["time"]}  date={transactions[i]["date"]} category={transactions[i]["category"]} price={transactions[i]["price"]} />
+        <Transactions onRefresh={onRefresh} id={filteredTransactions[i]["transaction_id"]} description={filteredTransactions[i]["description"]} goal={transactions[i]["goal"]}  time={filteredTransactions[i]["time"]}  date={filteredTransactions[i]["date"]} category={filteredTransactions[i]["category"]} price={filteredTransactions[i]["price"]} />
         </View>
       )}
 
   
   }
 
+  // PREPARE TO SHOW THE DATA
+  // for (let i=0, k=0; i<transactions.length ; i++ , k++ ){
+ 
+  //   if(i==0 || transactions[i]["date"]!=transactions[i-1]["date"]){
+  //     transaction.splice(0,0,
+  //       <View key={k}>
+  //       <Change_date date={transactions[i]["date"]}/>
+  //       </View>
+  //     )
+  //     transaction.splice(1,0,
+  //       <View key={k+1}>
+  //       <Transactions onRefresh={onRefresh} id={transactions[i]["transaction_id"]} description={transactions[i]["description"]} goal={transactions[i]["goal"]}  time={transactions[i]["time"]} date={transactions[i]["date"]} category={transactions[i]["category"]} price={transactions[i]["price"]} />
+  //       </View>
+  //     )
+  //     k+=1
+      
+  //   }
+  //   else{
+  //     transaction.splice(1,0,
+  //       <View key={k}>
+  //       <Transactions onRefresh={onRefresh} id={transactions[i]["transaction_id"]} description={transactions[i]["description"]} goal={transactions[i]["goal"]}  time={transactions[i]["time"]}  date={transactions[i]["date"]} category={transactions[i]["category"]} price={transactions[i]["price"]} />
+  //       </View>
+  //     )}
+
+  
+  // }
+
   return (
      <View style={styles.container}>
-       <SearchBar/>
+       <SearchBar value={searchTerm} onChangeText={handleSearch}/>
         <Text style={styles.title}>Transactions </Text>
         <View style={styles.extra}></View>
         <ScrollView 
@@ -88,7 +132,7 @@ const HeaderExpenses = () => {
           refreshControl={<RefreshControl refresh={refresh} onRefresh={onRefresh}/>}
           >
             
-        {transaction}
+        {transactionList}
         </ScrollView>
       </View>
 

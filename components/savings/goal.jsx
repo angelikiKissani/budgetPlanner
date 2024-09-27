@@ -58,9 +58,8 @@ const Goal = ({icon_name,icon_family,goal_name,start_date,finish_date,progress,g
     }
     //Add money to your goal
     const pressedDone = async()=>{
-        // console.log(newAdd);
-        let addValue = parseFloat(newAdd);
-        if (isNaN(addValue) || addValue <= 0) {
+        let addValue = parseFloat(newAdd.toFixed(1));
+        if (isNaN(addValue) ) {
             setAddMoney(false);
             setNewAdd(0);
             return;
@@ -76,6 +75,11 @@ const Goal = ({icon_name,icon_family,goal_name,start_date,finish_date,progress,g
             let storedData =await AsyncStorage.getItem("auth-rn");
             const parsed =JSON.parse(storedData);
             const {data}= await axios.post("https://budget-planner-backend-mcuw.onrender.com/api/add-money-goal",{name:goal_name,saved_this_month:(saved_this_month+addValue),newAdd:addValue,progress:(progress+addValue),user_id:parsed.user._id });
+            if (data.success === false) {
+                // Display error message if success is false
+                alert(`${data.message}`);
+                return; // Stop further execution
+              }
             setNewAdd(0);
             setAddMoney(false);
             console.log(data.user)

@@ -121,7 +121,18 @@ const styles = StyleSheet.create({
     fontWeight:"700",
     marginTop:1
 
-  }
+  },
+  
+  detailsContainer: {
+    marginHorizontal:10,
+    // backgroundColor: '#e0e0e0',
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  detailRow: {
+    marginBottom: 10,
+  },
 });
 
 export default styles;

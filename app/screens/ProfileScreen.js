@@ -14,21 +14,74 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Settings_Btn from "../../components/profile/general/Btn"
 import styles from '../../components/profile/general/general_setings.style';
 
-const NotificationsEnabled = ({enable}) =>{
-  // if(enable==true){
-  //   console.log("NOTIFICATIONS ON")}
-  // else{
-  //   console.log("NOTIFICATIONS OFF")
-  // }
-}
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
+
+const requestNotificationPermission = async () => {
+  const { status } = await Notifications.getPermissionsAsync();
+  if (status !== 'granted') {
+    const { status: finalStatus } = await Notifications.requestPermissionsAsync();
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return false;
+    }
+  }
+  return true;
+};
+
+const scheduleMonthlyNotification = async () => {
+  await Notifications.cancelAllScheduledNotificationsAsync(); 
+
+  const trigger = new Date();
+  trigger.setMonth(trigger.getMonth() + 1); // next month
+  trigger.setDate(1); // first of the month
+  trigger.setHours(9); // at 9 AM
+  trigger.setMinutes(0);
+
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: 'Monthly Goal Check',
+      body: 'It\'s the first of the month! Check your progress on your goals.',
+    },
+    trigger: {
+      date: trigger,
+      repeats: true, // every first of the month
+    },
+  });
+};
+
+const cancelNotifications = async () => {
+  await Notifications.cancelAllScheduledNotificationsAsync();
+};
+
+const NotificationsEnabled = ({ enable }) => {
+  if (enable) {
+    console.log("NOTIFICATIONS ON");
+  } else {
+    console.log("NOTIFICATIONS OFF");
+  }
+};
 
 
 export default function ProfileScreen({navigation}) {
   const [enable,setEnable] = useState(false)
   const [state,setState] = useContext(AuthContext)
 
-  const toggleSwitch = () => {
-    setEnable(previousState => !previousState );
+  const toggleSwitch = async() => {
+    setEnable((previousState) => !previousState);
+
+    if (!enable) {
+      const hasPermission = await requestNotificationPermission();
+      if (hasPermission) {
+        await scheduleMonthlyNotification();
+        console.log("Monthly notifications scheduled.");
+      } else {
+        alert('Notifications permissions are required to enable notifications.');
+      }
+    } else {
+      await cancelNotifications();
+      console.log("Notifications cancelled.");
+    }
   
   }
 
@@ -40,12 +93,7 @@ export default function ProfileScreen({navigation}) {
   }
   
 
-  // const pressedBudgetPlan =()=>{
-  //   return (
-  //     navigation.navigate("MyBudgetPlan")
-  //   )
-    
-  // }
+ 
   const pressedCategories =()=>{
     navigation.navigate("Categories")
     
@@ -77,11 +125,9 @@ export default function ProfileScreen({navigation}) {
       {/* general sett */}
             <ScrollView  >
                 <View style={styles.container}>
-                  <Text style={styles.title}>General</Text>
+                  <Text style={styles.title}>Settings</Text>
 
                   <Settings_Btn icon_name={"faPenToSquare"} title={"Edit Profile"} subtitle={"Update and modify your profile"} onPress={pressedEditProfile}/>
-                  {/* <Settings_Btn icon_name={"faLock"} title={"Privacy"} subtitle={"Change your password"} onPress={pressedPrivacy}/>
-                  */}
                   
                   {/* Notifications switch */}
                   <View style={styles.notif_Cont}>
@@ -108,15 +154,14 @@ export default function ProfileScreen({navigation}) {
                     </View>
 
 
-                  {/* <Settings_Btn icon_name={"faBell"} title={"Notifications"} subtitle={"Change your notification settings"} onPress={pressedNotifications}/> */}
                   
-                  <View style={styles.container2}>
+                  {/* <View style={styles.container2}>
                   <Text style={styles.title}>Budget Settings</Text>
-                  </View>
+                  </View> */}
                   {/* <Settings_Btn icon_name={"budget_plan"} title={"Budget Plan"} subtitle={"Modify your Budget Plan"} onPress={pressedBudgetPlan}/> */}
-                  <Settings_Btn icon_name={"categories"} title={"Categories"} subtitle={"Select categories for your expenses"} onPress={pressedCategories}/>
+                  {/* <Settings_Btn icon_name={"categories"} title={"Categories"} subtitle={"Select categories for your expenses"} onPress={pressedCategories}/> */}
                   
-                  <Text>{"\n"}</Text>
+                  {/* <Text>{"\n\n\n\n\n\n\n\n\n"}</Text> */}
                   
                   <Settings_Btn icon_name={"logout"} title={"Sign Out"} style_logout={true} onPress={pressedSignOut}/>
                   

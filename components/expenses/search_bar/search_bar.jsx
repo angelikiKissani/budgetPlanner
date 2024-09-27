@@ -5,7 +5,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { COLORS } from "../../../constants"
 
 
-const SearchBar=()=>{
+const SearchBar=({ value, onChangeText })=>{
 
     return (
         <View>
@@ -16,12 +16,10 @@ const SearchBar=()=>{
                    placeholderTextColor={COLORS.primary}
                    autoCapitalize="none"
                    autoCorrect={false}
-                   
+                   value={value}
+                   onChangeText={onChangeText}
         />
-        <View style={styles.icons}>
-        <AntDesign name="filter" size={17} color={COLORS.primary} />
-
-        </View>
+       
         </View>
         </View>
     )
