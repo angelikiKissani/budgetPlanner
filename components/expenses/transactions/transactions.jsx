@@ -55,15 +55,7 @@ const Transactions = ({description,price,category,goal,date,time,onRefresh,id}) 
 
 
 
-  // const pressedCategory = async (category_name)=>{
-  //   let storedData =await AsyncStorage.getItem("auth-rn");
-  //   const parsed =JSON.parse(storedData);
-  //   const {result}=await axios.post("http://172.20.10.3:8001/api/add-category",{category:category_name,description:description,user_id:parsed.user._id,price:-price,transaction_id:id})
-  //   setCategoryModalVisible(false)
-    
-  //   onRefresh()
-
-  // }
+ 
   const pressedRemove = async ()=>{
     let storedData =await AsyncStorage.getItem("auth-rn");
     const parsed =JSON.parse(storedData);
