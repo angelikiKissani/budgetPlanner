@@ -1,6 +1,4 @@
 BUDGET PLANNER
-npm install
-
 
 
 use:
