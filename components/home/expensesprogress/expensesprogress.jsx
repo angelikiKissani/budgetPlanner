@@ -36,8 +36,12 @@ const ExpensesProgress = () => {
   }
   const formattedLastMonth = lastMonth.toString().padStart(2, '0');
   const lastMonthYear = `${formattedLastMonth}/${year}`;
+  // console.log(lastMonthYear)
+  // const lastMonthYear = `08/2024`;
   const formattedCurrentMonth = currentMonth.toString().padStart(2, '0');
   const currentMonthYear = `${formattedCurrentMonth}/${currentYear}`;
+  // const currentMonthYear = `09/2024`;
+
 
 
 
@@ -192,14 +196,14 @@ const ExpensesProgress = () => {
     <View style={styles.container}>
       <Text style={styles.header}>Progress</Text>
       <View style={styles.container2}>
-        {currentMonthData.length > 4 ? renderBarChart(currentMonthData.map(item => item[0]), currentMonthData.map(item => item[1]), months[currentMonth - 1])
+        {currentMonthData.length > 4 ? renderBarChart(currentMonthData.map(item => item[0]), currentMonthData.map(item => item[1]), months[currentMonth - 2])
         :
         <View style={{ padding: 20, paddingBottom: 25, alignItems: "center" }}>
             <Text style={{ color: COLORS.primary, fontSize: SIZES.medium }}>To make visualisations we require additional transaction data.</Text>
           </View>}
         </View>
         <View style={styles.container2}>
-          {data.length >0 ? renderBarChart(data.map(item => item[0]), data.map(item => item[1]), months[lastMonth - 1]) : (
+          {data.length >0 ? renderBarChart(data.map(item => item[0]), data.map(item => item[1]), months[lastMonth - 2]) : (
             <View style={{ padding: 20, paddingBottom: 25, alignItems: "center" }}>
               <Text style={{ color: COLORS.primary, fontSize: SIZES.medium }}>To make visualisations we require additional transaction data.</Text>
             </View>
@@ -218,105 +222,6 @@ const ExpensesProgress = () => {
 
 
 
-
-  // const chartLabels = data.map(item => item[0]); 
-  // const chartDataValues = data.map(item => item[1]); 
-
-  // return (
-  //   <View style={styles.container}>
-  //   <Text style={styles.header}>Progress</Text>
-  //   <View style={styles.container2}>
-      
-  //   {data.length > 0 ?   
-  //     <View>
-  //     <View>
-  //       <Text style={{margin:20,fontSize:SIZES.medium,color:COLORS.dark,fontWeight:700}}>
-  //       Your expenses from last month: {months[lastMonth-1]}
-  //       </Text>
-  //     </View>
-  //     <BarChart
-  //       data={{
-  //         labels: chartLabels.slice(0,5),
-  //         datasets: [
-  //           {
-  //             data:chartDataValues.slice(0,5)
-  //           }
-  //         ]
-  //     }}
-      
-  //     width={screenWidth - 80}
-  //     height={250}
-      
-      
-  //     chartConfig={{
-        
-  //       barRadius:15,
-  //       fillShadowGradientFromOpacity:1,
-  //       fillShadowGradient:COLORS.dark,
-  //       fillShadowGradientFrom:COLORS.dark,
-        
-  //       fillShadowGradientTo:COLORS.light_secondary,
-  //       backgroundColor: "white",
-  //       backgroundGradientFrom: "white",
-  //       backgroundGradientTo: "white",
-  //       decimalPlaces: 2, 
-  //       color: (opacity = 1) => COLORS.primary,
-  //       labelColor: (opacity = 1) => COLORS.dark,
-        
-        
-        
-  //     }}
-  //     fromZero={true}
-  //     showBarTops={false}
-  //     xLabelsOffset={-5}
-  //     withInnerLines={false}
-  //     withHorizontalLabels={false}
-  //     withVerticalLabels={false}
-  //     bezier
-  //     showValuesOnTopOfBars={true}
-      
-  //     style={{
-        
-  //       paddingRight:12,
-  //       marginVertical: 5,
-  //       borderRadius: 15,
-  //         }}
-  //     />
-  //     <View style={{ flexDirection: 'row', marginTop: -40,width:screenWidth-75,height:50,justifyContent:"space-around",
-  //     left:5.5,
-  //       paddingRight:15,
-  //       paddingLeft:15,
-  //       marginVertical: 5, }}>
-  //       {chartLabels.slice(0,5).map((label, index) => (
-  //         <Text
-  //           key={index}
-  //           style={{
-  //             textAlign: 'center',
-  //             fontWeight: '700',
-  //             fontSize: 13,
-  //             color:COLORS.dark,
-  //             marginTop: 2,
-  //           }}
-  //         >
-  //           {label}
-  //         </Text>
-  //       ))}
-  //     </View>
-      
-  //     </View>
-  //     :<>
-  //     <View style={{padding:20,paddingBottom:25,alignItems:"center"}}>
-  //       <Text style={{color:COLORS.primary,fontSize:SIZES.medium}}>To make visualisations</Text>
-  //       <Text style={{color:COLORS.primary,fontSize:SIZES.medium}}> we require additional transaction data.</Text>
-  //     </View>
-  //     </>
-  //   }
-    
-      
-    
-  //   </View>
-  // </View>
-  // )
 }
 
 export default ExpensesProgress;
